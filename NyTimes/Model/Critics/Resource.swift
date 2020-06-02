@@ -11,14 +11,14 @@ import Foundation
 class Resource: Codable {
     
     var type: String
-    var src: String
+    var sourceURL: String
     var width: Int
     var height: Int
     var credit: String
 
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case src = "src"
+        case sourceURL = "src"
         case width = "width"
         case height = "height"
         case credit = "credit"
@@ -28,7 +28,7 @@ class Resource: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.type = try container.decode(String.self, forKey: .type)
-        self.src = try container.decode(String.self, forKey: .src)
+        self.sourceURL = try container.decode(String.self, forKey: .sourceURL)
         self.width = try container.decode(Int.self, forKey: .width)
         self.height = try container.decode(Int.self, forKey: .height)
         self.credit = try container.decode(String.self, forKey: .credit)

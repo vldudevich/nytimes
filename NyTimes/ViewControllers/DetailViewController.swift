@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class DetailViewController: UIViewController {
 
@@ -52,28 +53,22 @@ class DetailViewController: UIViewController {
     @IBAction func showDescription(_ sender: UIButton) {
         descriptionView.isHidden = !descriptionView.isHidden
     }
-    
-    func returnImage(multi: Multimedia?) -> UIImage {
-        var result = UIImage(named: "nophoto")
-        if let multimedia = multi,
-            let url = URL(string: multimedia.src) {
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    result = image
-                }
-            }
-        }
-        return result!
-    }
-    
+
     func configureCell(cell: CriticsReviewsTableViewCell, for indexPath: IndexPath) {
         cell.criticsMoviesTitleLabel.text = tempMovies[indexPath.row].displayTitle
         cell.criticsDescriptionLabel.text = tempMovies[indexPath.row].summaryShort
         cell.criticsNameMoviesLabel.text = tempMovies[indexPath.row].byline
         cell.criticsMoviesDateLabel.text = tempMovies[indexPath.row].dateUpdated
-        cell.criticsMoviesImageView.image = returnImage(multi: tempMovies[indexPath.row].multimedia)
+        if let multimedia = tempMovies[indexPath.row].multimedia,
+                let source = multimedia.sourceURL,
+                let url = URL(string: source) {
+                cell.criticsMoviesImageView.af_setImage(
+                    withURL: url
+                )
+            } else {
+                cell.criticsMoviesImageView.image = UIImage(named: "nophoto")
+            }
     }
-    
     func clearTable() {
         index = 0
     }

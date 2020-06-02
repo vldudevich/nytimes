@@ -66,21 +66,15 @@ class ReviewsViewController: UIViewController {
         cell.reviewDescriptionLabel.text = tempMovies[indexPath.row].summaryShort
         cell.reviewNameLabel.text = tempMovies[indexPath.row].byline
         cell.rewiewDateLabel.text = tempMovies[indexPath.row].dateUpdated
-        cell.reviewImageView.image = criticImage(for: tempMovies[indexPath.row].multimedia)
-    }
-    
-    func criticImage(for multi: Multimedia?) -> UIImage {
-        guard let source = multi?.src,
-            
-            let imageURL = URL(string: source),
-            
-            let imageData = try? Data(contentsOf: imageURL),
-            
-            let image = UIImage(data: imageData) else {
-                
-                return UIImage(named: "nophoto")!
+        if let multimedia = tempMovies[indexPath.row].multimedia,
+            let source = multimedia.sourceURL,
+            let url = URL(string: source) {
+            cell.reviewImageView.af_setImage(
+                withURL: url
+            )
+        } else {
+            cell.reviewImageView.image = UIImage(named: "nophoto")
         }
-        return image
     }
     
     func clearTable() {

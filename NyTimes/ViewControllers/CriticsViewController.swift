@@ -58,19 +58,6 @@ class CriticsViewController: UIViewController {
         }
     }
     
-    func criticImage(for multi: Multi?) -> UIImage {
-        guard let source = multi?.resource?.src,
-            
-            let imageURL = URL(string: source),
-            
-            let imageData = try? Data(contentsOf: imageURL),
-            
-            let image = UIImage(data: imageData) else {
-                
-                return UIImage(named: "nophoto")!
-        }
-        return image
-    }
     
     @objc func updateRefresh(_ sender: UIRefreshControl) {
         sender.endRefreshing()
@@ -79,7 +66,15 @@ class CriticsViewController: UIViewController {
     
     func configureCell(cell: CriticsCollectionViewCell, for indexPath: IndexPath) {
         cell.criticsNameLabel.text = tempCritics[indexPath.row].displayName
-        cell.criticsImageView.image = criticImage(for: tempCritics[indexPath.row].multimedia)
+        if let multimedia = tempCritics[indexPath.row].multimedia,
+            let source = multimedia.resource?.sourceURL,
+            let url = URL(string: source) {
+            cell.criticsImageView.af_setImage(
+                withURL: url
+            )
+        } else {
+            cell.criticsImageView.image = UIImage(named: "nophoto")
+        }
     }
     
     func sendData(for send: [Critics], for indexPath: IndexPath) {
@@ -88,10 +83,19 @@ class CriticsViewController: UIViewController {
         self.present(vc!, animated: true, completion: nil)
         
         vc?.criticNameLabel.text = critics[indexPath.row].displayName
-        vc?.criticImageView.image = criticImage(for: critics[indexPath.row].multimedia)
         vc?.descriptionButton.setTitle(critics[indexPath.row].status,for: .normal)
         vc?.detailTitleNavBar.title = critics[indexPath.row].displayName
         vc?.descriptionLabel.text = critics[indexPath.row].bio
+        vc?.criticImageView
+        if let multimedia = tempCritics[indexPath.row].multimedia,
+            let source = multimedia.resource?.sourceURL,
+            let url = URL(string: source) {
+            vc?.criticImageView.af_setImage(
+                withURL: url
+            )
+        } else {
+            vc?.criticImageView.image = UIImage(named: "nophoto")
+        }
     }
 }
 

@@ -10,7 +10,18 @@ import Foundation
 import UIKit
 
 class Movie: Codable {
-
+    
+    static func parseResponse( responseData: Data, completionHandler: (Review?) -> Void) {
+        let decoder = JSONDecoder()
+        do {
+            let moviesResponse = try decoder.decode(Review.self, from: responseData)
+            completionHandler(moviesResponse)
+            return
+        } catch {
+            print(error)
+        }
+    }
+    
     var displayTitle: String
     var rating: String
     var criticsPick: Int
@@ -21,8 +32,8 @@ class Movie: Codable {
     var openingDate: String?
     var dateUpdated: String?
     var link: Link
-    var multimedia: Multimedia
-
+    var multimedia: Multimedia?
+    
     private enum CodingKeys: String, CodingKey {
         case displayTitle = "display_title"
         case rating = "mpaa_rating"
@@ -50,17 +61,6 @@ class Movie: Codable {
         self.openingDate = try container.decodeIfPresent(String.self, forKey: .openingDate)
         self.dateUpdated = try container.decodeIfPresent(String.self, forKey: .dateUpdated)
         self.link = try container.decode(Link.self, forKey: .link)
-        self.multimedia = try container.decode(Multimedia.self, forKey: .multimedia)
-    }
-    
-    func parseResponse( responseData: Data, completionHandler: (Review?) -> Void) {
-        let decoder = JSONDecoder()
-        do {
-            let moviesResponse = try decoder.decode(Review.self, from: responseData)
-            completionHandler(moviesResponse)
-            return
-        } catch {
-            print(error)
-        }
+        self.multimedia = try container.decodeIfPresent(Multimedia.self, forKey: .multimedia)
     }
 }
