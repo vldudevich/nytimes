@@ -37,5 +37,4 @@ class Critics: Codable {
         self.multimedia = try container.decodeIfPresent(Multi.self, forKey: .multimedia)
     }
     
-    
 }

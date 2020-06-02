@@ -8,10 +8,6 @@
 
 import UIKit
 
-class Extensions: NSObject {
-
-}
-
 extension String {
     var htmlDecoded: String {
         let decoded = try? NSAttributedString(data: Data(utf8), options: [
@@ -40,4 +36,3 @@ extension UIView {
         }
     }
 }
-

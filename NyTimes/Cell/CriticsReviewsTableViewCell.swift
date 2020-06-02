@@ -17,5 +17,4 @@ class CriticsReviewsTableViewCell: UITableViewCell {
     @IBOutlet weak var criticsMoviesDateLabel: UILabel!
     
     static let identifier = "CriticsReviewsTableViewCell"
-
 }

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class Link: Codable {
+    
     var type: String
     var url: String
     var suggestedLink: String
@@ -19,6 +20,7 @@ class Link: Codable {
         case url = "url"
         case suggestedLink = "suggested_link_text"
     }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 

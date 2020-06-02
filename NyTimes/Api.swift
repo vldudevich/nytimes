@@ -5,7 +5,7 @@
 //  Created by vladislav on 22.05.2020.
 //  Copyright © 2020 vladislav. All rights reserved.
 //
-//singleton
+
 import Foundation
 import Alamofire
 
@@ -22,7 +22,6 @@ class API {
     static let reviewsMoviesURL = "reviews/"
     static let criticsURL = "critics/"
     static let endURL = ".json"
-
 
    static func request(for url: String, paramsDict: [String: Any]) -> DataRequest? {
        guard let reviewURL = URL(string: baseURL + url) else {

@@ -33,7 +33,7 @@ class CriticsViewController: UIViewController {
         criticsCollectionView.dataSource = self
         searchCriticLabel.delegate = self
         criticsCollectionView.refreshControl = tableRefreshControl
-         updateCritics()
+        updateCritics()
     }
     
     func clearTable() {
@@ -58,18 +58,18 @@ class CriticsViewController: UIViewController {
         }
     }
     
-    func returnImage(multi: Multi?) -> UIImage {
-        var result = UIImage(named: "nophoto")
-        if let multimedia = multi,
-            let source = multimedia.resource?.src,
-            let url = URL(string: source) {
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    result = image
-                }
-            }
+    func criticImage(for multi: Multi?) -> UIImage {
+        guard let source = multi?.resource?.src,
+            
+            let imageURL = URL(string: source),
+            
+            let imageData = try? Data(contentsOf: imageURL),
+            
+            let image = UIImage(data: imageData) else {
+                
+                return UIImage(named: "nophoto")!
         }
-        return result!
+        return image
     }
     
     @objc func updateRefresh(_ sender: UIRefreshControl) {
@@ -78,17 +78,25 @@ class CriticsViewController: UIViewController {
     }
     
     func configureCell(cell: CriticsCollectionViewCell, for indexPath: IndexPath) {
-        
-//        cell.criticsNameLabel.text = critics[indexPath.row].displayName
-//        cell.criticsImageView.image = returnImage(multi: critics[indexPath.row].multimedia)
         cell.criticsNameLabel.text = tempCritics[indexPath.row].displayName
-        cell.criticsImageView.image = returnImage(multi: tempCritics[indexPath.row].multimedia)
+        cell.criticsImageView.image = criticImage(for: tempCritics[indexPath.row].multimedia)
+    }
+    
+    func sendData(for send: [Critics], for indexPath: IndexPath) {
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+        self.present(vc!, animated: true, completion: nil)
+        
+        vc?.criticNameLabel.text = critics[indexPath.row].displayName
+        vc?.criticImageView.image = criticImage(for: critics[indexPath.row].multimedia)
+        vc?.descriptionButton.setTitle(critics[indexPath.row].status,for: .normal)
+        vc?.detailTitleNavBar.title = critics[indexPath.row].displayName
+        vc?.descriptionLabel.text = critics[indexPath.row].bio
     }
 }
 
 extension CriticsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tempCritics.count
     }
@@ -99,46 +107,34 @@ extension CriticsViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width / 2 , height: collectionView.frame.size.width / 2 )
     }
     
-
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
-        self.present(vc!, animated: true, completion: nil)
-        
-        vc?.criticNameLabel.text = critics[indexPath.row].displayName
-        vc?.criticImageView.image = returnImage(multi: critics[indexPath.row].multimedia)
-        vc?.descriptionButton.setTitle(critics[indexPath.row].status,for: .normal)
-        vc?.detailTitleNavBar.title = critics[indexPath.row].displayName
-        vc?.descriptionLabel.text = critics[indexPath.row].bio
+        sendData(for: critics, for: indexPath)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
         index = tempCritics.count
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if contentYoffset > 0 {
-            if distanceFromBottom < height {
+        if contentYoffset > 0 && distanceFromBottom < height && tempCritics.count < critics.count {
             print(" you reached end of the table")
-                if tempCritics.count < critics.count {
-                    tempCritics.append(critics[index])
-                    index += 1
-                    tempCritics.append(critics[index])
-                    index += 1
-                    criticsCollectionView.reloadData()
-                }
-            }
+            tempCritics.append(critics[index])
+            index += 1
+            criticsCollectionView.reloadData()
         }
     }
-    
 }
+
 extension CriticsViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchCriticLabel {
             textField.resignFirstResponder()

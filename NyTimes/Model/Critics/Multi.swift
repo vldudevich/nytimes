@@ -9,5 +9,6 @@
 import Foundation
 
 class Multi: Codable {
+    
     var resource: Resource?
 }

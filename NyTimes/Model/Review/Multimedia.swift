@@ -22,6 +22,7 @@ class Multimedia: Codable {
         case width = "width"
         case height = "height"
     }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -31,4 +32,3 @@ class Multimedia: Codable {
         self.height = try container.decode(Int.self, forKey: .height)
     }
 }
-

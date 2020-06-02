@@ -16,17 +16,12 @@ class ReviewsViewController: UIViewController {
     @IBOutlet weak var dataPickerTextFieldTo: UITextField!
     @IBOutlet weak var moviesTableView: UITableView!
     
-    let tableRefreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
-        return refreshControl
-    }()
-    
     let myDatePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.addTarget(self, action: #selector(setDate(_:)), for: .valueChanged)
         return datePicker
     }()
+    
     var movies = [Movie]()
     var tempMovies = [Movie]()
     var numResults = 0
@@ -34,9 +29,12 @@ class ReviewsViewController: UIViewController {
     var index = 0
     var bufDate = ""
 
-    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        let tableRefreshControl = UIRefreshControl()
+        tableRefreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
         
         self.moviesTableView.delegate = self
         self.moviesTableView.dataSource = self
@@ -47,11 +45,6 @@ class ReviewsViewController: UIViewController {
         
         moviesTableView.refreshControl = tableRefreshControl
         updateMovies()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
     }
     
     @objc func setDate(_ sender: UIDatePicker) {
@@ -73,29 +66,27 @@ class ReviewsViewController: UIViewController {
         cell.reviewDescriptionLabel.text = tempMovies[indexPath.row].summaryShort
         cell.reviewNameLabel.text = tempMovies[indexPath.row].byline
         cell.rewiewDateLabel.text = tempMovies[indexPath.row].dateUpdated
-        cell.reviewImageView.image = returnImage(multi: tempMovies[indexPath.row].multimedia)
-//        cell.reviewTitleLabel.text = movies[indexPath.row].displayTitle
-//        cell.reviewDescriptionLabel.text = movies[indexPath.row].summaryShort
-//        cell.reviewNameLabel.text = movies[indexPath.row].byline
-//        cell.rewiewDateLabel.text = movies[indexPath.row].dateUpdated
-//        cell.reviewImageView.image = returnImage(multi: movies[indexPath.row].multimedia)
+        cell.reviewImageView.image = criticImage(for: tempMovies[indexPath.row].multimedia)
     }
     
-    func returnImage(multi: Multimedia?) -> UIImage {
-        var result = UIImage(named: "nophoto")
-        if let multimedia = multi,
-            let url = URL(string: multimedia.src) {
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    result = image
-                }
-            }
+    func criticImage(for multi: Multimedia?) -> UIImage {
+        guard let source = multi?.src,
+            
+            let imageURL = URL(string: source),
+            
+            let imageData = try? Data(contentsOf: imageURL),
+            
+            let image = UIImage(data: imageData) else {
+                
+                return UIImage(named: "nophoto")!
         }
-        return result!
+        return image
     }
+    
     func clearTable() {
         index = 0
     }
+    
     func updateMovies() {
         clearTable()
         API.reviews(stringToSearch: searchTextField.text ?? "", dateToSearch: DateRange(fromDate: dataPickerTextFieldFrom.text!, toDate: dataPickerTextFieldTo.text!),  succes: { (data) in
@@ -106,7 +97,7 @@ class ReviewsViewController: UIViewController {
                     self.tempMovies.append(self.movies[self.index])
                     self.index += 1
                 }
-                    self.moviesTableView.reloadData()
+                self.moviesTableView.reloadData()
             }
         }) { (error) in
             print(error)
@@ -115,6 +106,7 @@ class ReviewsViewController: UIViewController {
 }
 
 extension ReviewsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tempMovies.count
     }
@@ -135,24 +127,22 @@ extension ReviewsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
         index = tempMovies.count
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if contentYoffset > 0 {
-            if distanceFromBottom < height {
+        if contentYoffset > 0 && distanceFromBottom < height && tempMovies.count < movies.count {
             print(" you reached end of the table")
-                if tempMovies.count < movies.count {
-                    tempMovies.append(movies[index])
-                    index += 1
-                    moviesTableView.reloadData()
-                }
-            }
+            tempMovies.append(movies[index])
+            index += 1
+            moviesTableView.reloadData()
         }
     }
 }
 
 extension ReviewsViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchTextField {
             textField.resignFirstResponder()
@@ -183,4 +173,3 @@ extension ReviewsViewController: UITextFieldDelegate {
         }
     }
 }
-

@@ -20,11 +20,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var descriptionView: UIView!
     
     let lightBlue = UIColor(red: 78/255, green: 103/255, blue: 255/255, alpha: 1)
-    let tableRefreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
-        return refreshControl
-    }()
     
     var movies = [Movie]()
     var tempMovies = [Movie]()
@@ -34,7 +29,10 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        acceptStyle()
+        let tableRefreshControl = UIRefreshControl()
+        tableRefreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
+        
+        loadAcceptStyle()
         criticsMoviesTableView.delegate = self
         criticsMoviesTableView.dataSource = self
         criticsMoviesTableView.refreshControl = tableRefreshControl
@@ -74,11 +72,6 @@ class DetailViewController: UIViewController {
         cell.criticsNameMoviesLabel.text = tempMovies[indexPath.row].byline
         cell.criticsMoviesDateLabel.text = tempMovies[indexPath.row].dateUpdated
         cell.criticsMoviesImageView.image = returnImage(multi: tempMovies[indexPath.row].multimedia)
-//        cell.criticsMoviesImageView.image = returnImage(multi: self.movies[indexPath.row].multimedia)
-//        cell.criticsMoviesTitleLabel.text = movies[indexPath.row].displayTitle
-//        cell.criticsDescriptionLabel.text = movies[indexPath.row].summaryShort
-//        cell.criticsNameMoviesLabel.text = movies[indexPath.row].byline
-//        cell.criticsMoviesDateLabel.text = movies[indexPath.row].dateUpdated
     }
     
     func clearTable() {
@@ -102,7 +95,7 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func acceptStyle() {
+    func loadAcceptStyle() {
         myNavigationBar.barTintColor = lightBlue
         descriptionButton.backgroundColor = lightBlue
         myNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -110,6 +103,7 @@ class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tempMovies.count
     }
@@ -126,19 +120,16 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
         index = tempMovies.count
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if contentYoffset > 0 {
-            if distanceFromBottom < height {
+        if contentYoffset > 0 && distanceFromBottom < height && tempMovies.count < movies.count {
             print(" you reached end of the table")
-                if tempMovies.count < movies.count {
-                    tempMovies.append(movies[index])
-                    index += 1
-                    criticsMoviesTableView.reloadData()
-                }
-            }
+            tempMovies.append(movies[index])
+            index += 1
+            criticsMoviesTableView.reloadData()
         }
     }
 }

@@ -9,12 +9,24 @@
 import UIKit
 
 class Review: Codable {
-
-    var status : String
-    var copyright : String
-    var hasMore : Bool
-    var numberResult : Int
-    var results : [Movie]
+    
+    static func parseResponse( responseData: Data, completionHandler: (Review?) -> Void) {
+        let decoder = JSONDecoder()
+        do {
+            let moviesResponse = try decoder.decode(Review.self, from: responseData)
+            print(moviesResponse)
+            completionHandler(moviesResponse)
+            return
+        } catch {
+            print(error)
+        }
+    }
+    
+    var status: String
+    var copyright: String
+    var hasMore: Bool
+    var numberResult: Int
+    var results: [Movie]
 
     enum CodingKeys: String, CodingKey {
         case status = "status"
@@ -32,19 +44,7 @@ class Review: Codable {
         self.numberResult = try container.decode(Int.self, forKey: .numberResult)
         self.results = try container.decode([Movie].self, forKey: .results)
     }
-    
-    static func parseResponse( responseData: Data, completionHandler: (Review?) -> Void) {
-        let decoder = JSONDecoder()
-        do {
-            let moviesResponse = try decoder.decode(Review.self, from: responseData)
-            print(moviesResponse)
-            completionHandler(moviesResponse)
-            return
-        } catch {
-            print(error)
-        }
-        completionHandler(nil)
-    }
+
 }
 
 

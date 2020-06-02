@@ -71,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wej-Ig-Ch0">
-                                <rect key="frame" x="0.0" y="94" width="414" height="802"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zcG-dg-76Y">
                                     <size key="itemSize" width="194" height="195"/>
@@ -127,7 +127,7 @@
                             <constraint firstItem="wej-Ig-Ch0" firstAttribute="top" secondItem="xpO-7l-deb" secondAttribute="bottom" constant="8" id="X0O-7n-LLH"/>
                             <constraint firstItem="8xm-18-FUY" firstAttribute="trailing" secondItem="xpO-7l-deb" secondAttribute="trailing" constant="8" id="Y6k-rS-fQr"/>
                             <constraint firstItem="xpO-7l-deb" firstAttribute="top" secondItem="8xm-18-FUY" secondAttribute="top" constant="8" id="bYo-Ub-V6L"/>
-                            <constraint firstItem="8xm-18-FUY" firstAttribute="bottom" secondItem="wej-Ig-Ch0" secondAttribute="bottom" constant="-34" id="flC-WT-Qmq"/>
+                            <constraint firstItem="8xm-18-FUY" firstAttribute="bottom" secondItem="wej-Ig-Ch0" secondAttribute="bottom" id="flC-WT-Qmq"/>
                             <constraint firstItem="wej-Ig-Ch0" firstAttribute="leading" secondItem="8xm-18-FUY" secondAttribute="leading" id="pFN-k0-6WK"/>
                             <constraint firstItem="xpO-7l-deb" firstAttribute="leading" secondItem="8xm-18-FUY" secondAttribute="leading" constant="8" id="x6m-lL-zBF"/>
                         </constraints>
@@ -152,14 +152,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rZ-FP-fPR">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <color key="tintColor" red="0.20146340082279807" green="0.40421052001553548" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Title" id="eaZ-Oi-ELV"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9KS-N1-bqs">
-                                <rect key="frame" x="0.0" y="519" width="414" height="377"/>
+                                <rect key="frame" x="0.0" y="555" width="414" height="307"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CriticsReviewsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CriticsReviewsTableViewCell" rowHeight="199" id="a63-lh-B9Y" customClass="CriticsReviewsTableViewCell" customModule="NyTimes" customModuleProvider="target">
@@ -235,7 +235,7 @@
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hVE-22-hbt">
-                                <rect key="frame" x="8" y="52" width="398" height="451"/>
+                                <rect key="frame" x="8" y="96" width="398" height="451"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jfX-ky-Tjq">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="224"/>
@@ -330,12 +330,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="hVE-22-hbt" secondAttribute="trailing" constant="8" id="3pe-sX-gFc"/>
-                            <constraint firstAttribute="bottom" secondItem="9KS-N1-bqs" secondAttribute="bottom" id="GGj-t5-loK"/>
+                            <constraint firstItem="PtK-wy-q5Z" firstAttribute="bottom" secondItem="9KS-N1-bqs" secondAttribute="bottom" id="GGj-t5-loK"/>
                             <constraint firstItem="cx4-K3-SIc" firstAttribute="height" secondItem="PoY-wB-9Qv" secondAttribute="height" multiplier="0.25" id="IK8-Ll-iZW"/>
                             <constraint firstAttribute="trailing" secondItem="4rZ-FP-fPR" secondAttribute="trailing" id="Kzx-ec-QGi"/>
-                            <constraint firstItem="9KS-N1-bqs" firstAttribute="top" secondItem="hVE-22-hbt" secondAttribute="bottom" constant="16" id="L4q-52-7aB"/>
+                            <constraint firstItem="9KS-N1-bqs" firstAttribute="top" secondItem="hVE-22-hbt" secondAttribute="bottom" constant="8" id="L4q-52-7aB"/>
                             <constraint firstItem="4rZ-FP-fPR" firstAttribute="leading" secondItem="PoY-wB-9Qv" secondAttribute="leading" id="MR4-fY-zno"/>
-                            <constraint firstItem="4rZ-FP-fPR" firstAttribute="top" secondItem="PoY-wB-9Qv" secondAttribute="top" id="PZn-ia-Ur1"/>
+                            <constraint firstItem="4rZ-FP-fPR" firstAttribute="top" secondItem="PtK-wy-q5Z" secondAttribute="top" id="PZn-ia-Ur1"/>
                             <constraint firstItem="9KS-N1-bqs" firstAttribute="trailing" secondItem="PtK-wy-q5Z" secondAttribute="trailing" id="h6A-FZ-5Z6"/>
                             <constraint firstItem="hVE-22-hbt" firstAttribute="top" secondItem="4rZ-FP-fPR" secondAttribute="bottom" constant="8" id="i3W-HT-zuB"/>
                             <constraint firstItem="hVE-22-hbt" firstAttribute="leading" secondItem="PtK-wy-q5Z" secondAttribute="leading" constant="8" id="kFe-4k-K6O"/>
@@ -400,7 +400,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wKz-w1-L4n">
-                                <rect key="frame" x="0.0" y="178" width="414" height="718"/>
+                                <rect key="frame" x="0.0" y="178" width="414" height="684"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReviewTableViewCell" rowHeight="194" id="BdC-aC-SyC" customClass="ReviewsTableViewCell" customModule="NyTimes" customModuleProvider="target">
@@ -475,7 +475,7 @@
                             <constraint firstItem="wKz-w1-L4n" firstAttribute="top" secondItem="bmf-ox-8op" secondAttribute="bottom" constant="8" id="BvD-Jn-GzU"/>
                             <constraint firstItem="S3R-LS-zlI" firstAttribute="trailing" secondItem="wKz-w1-L4n" secondAttribute="trailing" id="E9V-5g-e1G"/>
                             <constraint firstItem="bmf-ox-8op" firstAttribute="leading" secondItem="S3R-LS-zlI" secondAttribute="leading" constant="8" id="Hzr-Z5-0Ak"/>
-                            <constraint firstAttribute="bottom" secondItem="wKz-w1-L4n" secondAttribute="bottom" id="Tf3-1q-taS"/>
+                            <constraint firstItem="S3R-LS-zlI" firstAttribute="bottom" secondItem="wKz-w1-L4n" secondAttribute="bottom" id="Tf3-1q-taS"/>
                             <constraint firstItem="S3R-LS-zlI" firstAttribute="trailing" secondItem="63A-bS-U7a" secondAttribute="trailing" constant="8" id="ThA-FT-gRV"/>
                             <constraint firstItem="S3R-LS-zlI" firstAttribute="trailing" secondItem="Yhf-a4-32u" secondAttribute="trailing" constant="8" id="YGm-Xo-0E0"/>
                             <constraint firstItem="S3R-LS-zlI" firstAttribute="trailing" secondItem="bmf-ox-8op" secondAttribute="trailing" constant="8" id="bms-PY-onb"/>

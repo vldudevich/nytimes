@@ -9,6 +9,7 @@
 import Foundation
 
 class Resource: Codable {
+    
     var type: String
     var src: String
     var width: Int
@@ -31,6 +32,5 @@ class Resource: Codable {
         self.width = try container.decode(Int.self, forKey: .width)
         self.height = try container.decode(Int.self, forKey: .height)
         self.credit = try container.decode(String.self, forKey: .credit)
-        
     }
 }
