@@ -15,7 +15,7 @@ class ReviewsTableViewCell: UITableViewCell {
     @IBOutlet weak var reviewDescriptionLabel: UILabel!
     @IBOutlet weak var reviewNameLabel: UILabel!
     @IBOutlet weak var rewiewDateLabel: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
     
     static let identifier = "ReviewTableViewCell"
 }
-

@@ -15,6 +15,7 @@ class ReviewsViewController: UIViewController {
     @IBOutlet weak var dataPickerTextFieldFrom: UITextField!
     @IBOutlet weak var dataPickerTextFieldTo: UITextField!
     @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var shareButton: UIButton!
     
     let myDatePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -45,6 +46,12 @@ class ReviewsViewController: UIViewController {
         
         moviesTableView.refreshControl = tableRefreshControl
         updateMovies()
+    }
+    
+    @IBAction func tapToShare(_ sender: Any) {
+        let activityController = UIActivityViewController(activityItems: [], applicationActivities: [])
+        activityController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(activityController, animated: true)
     }
     
     @objc func setDate(_ sender: UIDatePicker) {

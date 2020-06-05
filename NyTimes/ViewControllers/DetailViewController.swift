@@ -45,6 +45,12 @@ class DetailViewController: UIViewController {
         updateCriticsReviews()
     }
     
+    @IBAction func tapToShare(_ sender: Any) {
+        let activityController = UIActivityViewController(activityItems: [], applicationActivities: [])
+        activityController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(activityController, animated: true)
+    }
+    
     @objc func updateRefresh(_ sender: UIRefreshControl) {
         sender.endRefreshing()
         updateCriticsReviews()

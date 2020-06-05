@@ -86,7 +86,6 @@ class CriticsViewController: UIViewController {
         vc?.descriptionButton.setTitle(critics[indexPath.row].status,for: .normal)
         vc?.detailTitleNavBar.title = critics[indexPath.row].displayName
         vc?.descriptionLabel.text = critics[indexPath.row].bio
-        vc?.criticImageView
         if let multimedia = tempCritics[indexPath.row].multimedia,
             let source = multimedia.resource?.sourceURL,
             let url = URL(string: source) {

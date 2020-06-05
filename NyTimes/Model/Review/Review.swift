@@ -44,10 +44,4 @@ class Review: Codable {
         self.numberResult = try container.decode(Int.self, forKey: .numberResult)
         self.results = try container.decode([Movie].self, forKey: .results)
     }
-
 }
-
-
-
-
-

@@ -15,6 +15,7 @@ class CriticsReviewsTableViewCell: UITableViewCell {
     @IBOutlet weak var criticsDescriptionLabel: UILabel!
     @IBOutlet weak var criticsNameMoviesLabel: UILabel!
     @IBOutlet weak var criticsMoviesDateLabel: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
     
     static let identifier = "CriticsReviewsTableViewCell"
 }
