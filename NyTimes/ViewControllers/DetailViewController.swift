@@ -45,12 +45,6 @@ class DetailViewController: UIViewController {
         updateCriticsReviews()
     }
     
-    @IBAction func tapToShare(_ sender: Any) {
-        let activityController = UIActivityViewController(activityItems: [], applicationActivities: [])
-        activityController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        present(activityController, animated: true)
-    }
-    
     @objc func updateRefresh(_ sender: UIRefreshControl) {
         sender.endRefreshing()
         updateCriticsReviews()
@@ -65,6 +59,7 @@ class DetailViewController: UIViewController {
         cell.criticsDescriptionLabel.text = tempMovies[indexPath.row].summaryShort
         cell.criticsNameMoviesLabel.text = tempMovies[indexPath.row].byline
         cell.criticsMoviesDateLabel.text = tempMovies[indexPath.row].dateUpdated
+        cell.cellDelegate = self
         if let multimedia = tempMovies[indexPath.row].multimedia,
                 let source = multimedia.sourceURL,
                 let url = URL(string: source) {
@@ -132,5 +127,20 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             index += 1
             criticsMoviesTableView.reloadData()
         }
+    }
+}
+
+extension DetailViewController: TableViewNew {
+    func onClick(index: Int) {
+        let image = UIImageView()
+        if let multimedia = tempMovies[index].multimedia,
+            let source = multimedia.sourceURL,
+            let url = URL(string: source) {
+                image.af_setImage(withURL: url)
+            } else {
+            image.image = UIImage(named: "nophoto")
+            }
+        let activityController = UIActivityViewController(activityItems: [image.image!, tempMovies[index].byline], applicationActivities: nil)
+        present(activityController, animated: true)
     }
 }

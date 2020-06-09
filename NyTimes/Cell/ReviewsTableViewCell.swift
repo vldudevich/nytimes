@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TableViewNew {
+    func onClick(index: Int)
+}
+
 class ReviewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var reviewTitleLabel: UILabel!
@@ -18,4 +22,10 @@ class ReviewsTableViewCell: UITableViewCell {
     @IBOutlet weak var shareButton: UIButton!
     
     static let identifier = "ReviewTableViewCell"
+    var cellDelegate: TableViewNew?
+    var index: IndexPath?
+    
+    @IBAction func shareClick(_ sender: Any) {
+        cellDelegate?.onClick(index: (index?.row) ?? 0)
+    }
 }

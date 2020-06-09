@@ -15,7 +15,6 @@ class ReviewsViewController: UIViewController {
     @IBOutlet weak var dataPickerTextFieldFrom: UITextField!
     @IBOutlet weak var dataPickerTextFieldTo: UITextField!
     @IBOutlet weak var moviesTableView: UITableView!
-    @IBOutlet weak var shareButton: UIButton!
     
     let myDatePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -47,12 +46,7 @@ class ReviewsViewController: UIViewController {
         moviesTableView.refreshControl = tableRefreshControl
         updateMovies()
     }
-    
-    @IBAction func tapToShare(_ sender: Any) {
-        let activityController = UIActivityViewController(activityItems: [], applicationActivities: [])
-        activityController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        present(activityController, animated: true)
-    }
+
     
     @objc func setDate(_ sender: UIDatePicker) {
 
@@ -73,12 +67,13 @@ class ReviewsViewController: UIViewController {
         cell.reviewDescriptionLabel.text = tempMovies[indexPath.row].summaryShort
         cell.reviewNameLabel.text = tempMovies[indexPath.row].byline
         cell.rewiewDateLabel.text = tempMovies[indexPath.row].dateUpdated
+        cell.cellDelegate = self
+        cell.index = indexPath
         if let multimedia = tempMovies[indexPath.row].multimedia,
             let source = multimedia.sourceURL,
             let url = URL(string: source) {
-            cell.reviewImageView.af_setImage(
-                withURL: url
-            )
+            
+            cell.reviewImageView.af_setImage(withURL: url)
         } else {
             cell.reviewImageView.image = UIImage(named: "nophoto")
         }
@@ -121,8 +116,9 @@ extension ReviewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         moviesTableView.deselectRow(at: indexPath, animated: true)
+        
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
@@ -172,5 +168,20 @@ extension ReviewsViewController: UITextFieldDelegate {
             updateMovies()
             
         }
+    }
+}
+
+extension ReviewsViewController: TableViewNew {
+    func onClick(index: Int) {
+        let image = UIImageView()
+        if let multimedia = tempMovies[index].multimedia,
+            let source = multimedia.sourceURL,
+            let url = URL(string: source) {
+                image.af_setImage(withURL: url)
+            } else {
+            image.image = UIImage(named: "nophoto")
+            }
+        let activityController = UIActivityViewController(activityItems: [image.image!, tempMovies[index].byline], applicationActivities: nil)
+        present(activityController, animated: true)
     }
 }

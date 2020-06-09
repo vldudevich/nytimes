@@ -206,7 +206,7 @@
                                                     <rect key="frame" x="360.5" y="129.5" width="45.5" height="53.5"/>
                                                     <state key="normal" title="Button" image="share"/>
                                                     <connections>
-                                                        <action selector="tapToShare:" destination="DaJ-MI-CTg" eventType="touchUpInside" id="x06-Pc-dKd"/>
+                                                        <action selector="shareTap:" destination="a63-lh-B9Y" eventType="touchUpInside" id="MXe-nf-NlQ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -239,7 +239,7 @@
                                             <outlet property="criticsMoviesImageView" destination="Ai9-Sv-JOe" id="ItL-Dg-Eu5"/>
                                             <outlet property="criticsMoviesTitleLabel" destination="R11-Q2-smQ" id="mwb-yY-45b"/>
                                             <outlet property="criticsNameMoviesLabel" destination="wEZ-AD-QqM" id="ZA1-N3-c55"/>
-                                            <outlet property="shareButton" destination="Krr-mh-1z3" id="B9e-ok-Vrf"/>
+                                            <outlet property="shareButton" destination="Krr-mh-1z3" id="dNJ-uF-JnI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -451,7 +451,7 @@
                                                     <rect key="frame" x="360.5" y="125" width="45.5" height="53"/>
                                                     <state key="normal" title="Button" image="share"/>
                                                     <connections>
-                                                        <action selector="tapToShare:" destination="cvB-vg-LM5" eventType="touchUpInside" id="Dd8-T4-OJW"/>
+                                                        <action selector="shareClick:" destination="BdC-aC-SyC" eventType="touchUpInside" id="7XT-iW-LFm"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -484,7 +484,7 @@
                                             <outlet property="reviewNameLabel" destination="QdX-We-VrV" id="VgP-gr-Iqb"/>
                                             <outlet property="reviewTitleLabel" destination="xpO-7d-Ij1" id="LeM-jU-Rts"/>
                                             <outlet property="rewiewDateLabel" destination="9ir-ip-pu1" id="Z5t-22-9zY"/>
-                                            <outlet property="shareButton" destination="FGU-UC-ylF" id="LRP-fm-1UV"/>
+                                            <outlet property="shareButton" destination="FGU-UC-ylF" id="y6o-Il-OFo"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

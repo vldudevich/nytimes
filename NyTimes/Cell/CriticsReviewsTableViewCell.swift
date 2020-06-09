@@ -9,7 +9,7 @@
 import UIKit
 
 class CriticsReviewsTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var criticsMoviesImageView: UIImageView!
     @IBOutlet weak var criticsMoviesTitleLabel: UILabel!
     @IBOutlet weak var criticsDescriptionLabel: UILabel!
@@ -18,4 +18,10 @@ class CriticsReviewsTableViewCell: UITableViewCell {
     @IBOutlet weak var shareButton: UIButton!
     
     static let identifier = "CriticsReviewsTableViewCell"
+    var cellDelegate: TableViewNew?
+    var index: IndexPath?
+    
+    @IBAction func shareTap(_ sender: Any) {
+         cellDelegate?.onClick(index: (index?.row) ?? 0)
+    }
 }
