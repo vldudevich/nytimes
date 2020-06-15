@@ -14,6 +14,7 @@ class API {
     typealias CompletionBlock = (_ success: Data) -> Void
     typealias ErrorBlock = (_ error: Any) -> Void
     typealias ImageBlock = (_ success: UIImage) -> Void
+    
     static let apiKey = "api-key"
     static let apiKeyValue  = "cGDuolttixJXxCmkFDeTTNnOA5EOidPt"
     static let baseURL = "https://api.nytimes.com/svc/movies/v2/"

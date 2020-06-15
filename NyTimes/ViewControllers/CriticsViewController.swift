@@ -14,13 +14,13 @@ class CriticsViewController: UIViewController {
     @IBOutlet weak var searchCriticLabel: UITextField!
     @IBOutlet weak var criticsCollectionView: UICollectionView!
     
-    var critics = [Critics]()
-    var tempCritics = [Critics]()
+    private var critics = [Critics]()
+    private var tempCritics = [Critics]()
     
-    var limit = 2
-    var index = 0
+    private var limit = 2
+    private var index = 0
     
-    let tableRefreshControl: UIRefreshControl = {
+    private let tableRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
         return refreshControl
@@ -36,7 +36,7 @@ class CriticsViewController: UIViewController {
         updateCritics()
     }
     
-    func clearTable() {
+    private func clearTable() {
         index = 0
     }
     
@@ -69,9 +69,7 @@ class CriticsViewController: UIViewController {
         if let multimedia = tempCritics[indexPath.row].multimedia,
             let source = multimedia.resource?.sourceURL,
             let url = URL(string: source) {
-            cell.criticsImageView.af_setImage(
-                withURL: url
-            )
+            cell.criticsImageView.af.setImage(withURL: url)
         } else {
             cell.criticsImageView.image = UIImage(named: "nophoto")
         }
@@ -89,9 +87,7 @@ class CriticsViewController: UIViewController {
         if let multimedia = tempCritics[indexPath.row].multimedia,
             let source = multimedia.resource?.sourceURL,
             let url = URL(string: source) {
-            vc?.criticImageView.af_setImage(
-                withURL: url
-            )
+            vc?.criticImageView.af.setImage(withURL: url)
         } else {
             vc?.criticImageView.image = UIImage(named: "nophoto")
         }

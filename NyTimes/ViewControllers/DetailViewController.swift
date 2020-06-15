@@ -63,7 +63,7 @@ class DetailViewController: UIViewController {
         if let multimedia = tempMovies[indexPath.row].multimedia,
                 let source = multimedia.sourceURL,
                 let url = URL(string: source) {
-                cell.criticsMoviesImageView.af_setImage(
+            cell.criticsMoviesImageView.af.setImage(
                     withURL: url
                 )
             } else {
@@ -136,7 +136,7 @@ extension DetailViewController: TableViewNew {
         if let multimedia = tempMovies[index].multimedia,
             let source = multimedia.sourceURL,
             let url = URL(string: source) {
-                image.af_setImage(withURL: url)
+            image.af.setImage(withURL: url)
             } else {
             image.image = UIImage(named: "nophoto")
             }

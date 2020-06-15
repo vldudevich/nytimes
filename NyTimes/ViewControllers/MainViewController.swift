@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
-    enum TabIndex : Int {
+    private enum TabIndex : Int {
         case reviewsViewControllerTab = 0
         case criticsViewControllerTab = 1
     }
@@ -20,8 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var myToolBar: UIToolbar!
     @IBOutlet weak var myNavigationItem: UINavigationItem!
     
-    let lightBlue = UIColor(red: 78/255, green: 103/255, blue: 255/255, alpha: 1)
-    var currentViewController: UIViewController?
+    private var currentViewController: UIViewController?
     
     lazy var reviewsViewController: UIViewController? = {
         let reviewsViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReviewsViewControllerId")
@@ -46,7 +45,7 @@ class ViewController: UIViewController {
         displayCurrentTab(sender.selectedSegmentIndex)
     }
     
-    func displayCurrentTab(_ tabIndex: Int){
+    private func displayCurrentTab(_ tabIndex: Int){
         
         guard let currentViewController = viewControllerForSelectedSegmentIndex(tabIndex) else {return}
             
@@ -58,7 +57,7 @@ class ViewController: UIViewController {
         self.currentViewController = currentViewController
     }
     
-    func viewControllerForSelectedSegmentIndex(_ index: Int) -> UIViewController? {
+    private func viewControllerForSelectedSegmentIndex(_ index: Int) -> UIViewController? {
         var currentViewController: UIViewController?
         switch index {
         case TabIndex.reviewsViewControllerTab.rawValue :
@@ -73,7 +72,7 @@ class ViewController: UIViewController {
         return currentViewController
     }
     
-    func reviewStyle() {
+    private func reviewStyle() {
         
         myNavigationItem.title = "Reviews"
         self.navigationController?.navigationBar.barTintColor = UIColor.orange
@@ -85,14 +84,14 @@ class ViewController: UIViewController {
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.orange], for: .selected)
     }
     
-    func criticsStyle() {
+    private func criticsStyle() {
         
         myNavigationItem.title = "Critics"
-        self.navigationController?.navigationBar.barTintColor = lightBlue
+        self.navigationController?.navigationBar.barTintColor = .lightBlue
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        myToolBar.barTintColor = lightBlue
-        segmentControl.backgroundColor = lightBlue
+        myToolBar.barTintColor = .lightBlue
+        segmentControl.backgroundColor = .lightBlue
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: lightBlue], for: .selected)
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightBlue], for: .selected)
     }
 }

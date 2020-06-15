@@ -22,17 +22,16 @@ class ReviewsViewController: UIViewController {
         return datePicker
     }()
     
-    var movies = [Movie]()
-    var tempMovies = [Movie]()
-    var numResults = 0
-    var limit = 3
-    var index = 0
-    var bufDate = ""
+    private var movies = [Movie]()
+    private var tempMovies = [Movie]()
+    private var numResults = 0
+    private var limit = 3
+    private var index = 0
+    private var bufDate = ""
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         let tableRefreshControl = UIRefreshControl()
         tableRefreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
         
@@ -60,23 +59,6 @@ class ReviewsViewController: UIViewController {
     @objc func updateRefresh(_ sender: UIRefreshControl) {
         sender.endRefreshing()
         updateMovies()
-    }
-    
-    func configureCell(cell: ReviewsTableViewCell, for indexPath: IndexPath) {
-        cell.reviewTitleLabel.text = tempMovies[indexPath.row].displayTitle
-        cell.reviewDescriptionLabel.text = tempMovies[indexPath.row].summaryShort
-        cell.reviewNameLabel.text = tempMovies[indexPath.row].byline
-        cell.rewiewDateLabel.text = tempMovies[indexPath.row].dateUpdated
-        cell.cellDelegate = self
-        cell.index = indexPath
-        if let multimedia = tempMovies[indexPath.row].multimedia,
-            let source = multimedia.sourceURL,
-            let url = URL(string: source) {
-            
-            cell.reviewImageView.af_setImage(withURL: url)
-        } else {
-            cell.reviewImageView.image = UIImage(named: "nophoto")
-        }
     }
     
     func clearTable() {
@@ -109,8 +91,9 @@ extension ReviewsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReviewsTableViewCell.identifier) as! ReviewsTableViewCell
-        configureCell(cell: cell, for: indexPath)
-        
+        cell.cellDelegate = self
+        cell.index = indexPath
+        cell.configureCell(results: tempMovies, for: indexPath)
         return cell
     }
     
@@ -119,10 +102,10 @@ extension ReviewsViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 200
+//    }
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         index = tempMovies.count
@@ -177,7 +160,7 @@ extension ReviewsViewController: TableViewNew {
         if let multimedia = tempMovies[index].multimedia,
             let source = multimedia.sourceURL,
             let url = URL(string: source) {
-                image.af_setImage(withURL: url)
+            image.af.setImage(withURL: url)
             } else {
             image.image = UIImage(named: "nophoto")
             }
