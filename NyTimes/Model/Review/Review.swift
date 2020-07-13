@@ -10,7 +10,7 @@ import UIKit
 
 class Review: Codable {
     
-    static func parseResponse( responseData: Data, completionHandler: (Review?) -> Void) {
+    static func parseResponse( responseData: Data, completionHandler: (Review) -> Void) {
         let decoder = JSONDecoder()
         do {
             let moviesResponse = try decoder.decode(Review.self, from: responseData)

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GdW-IV-ovu">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ci7-zf-rU6">
+            <objects>
+                <viewController storyboardIdentifier="CriticModuleViewController" title="Critics" id="GdW-IV-ovu" customClass="CriticModuleViewController" customModule="NyTimes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hek-zM-gf9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Tzf-El-N4d">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bTo-1Q-9PT">
+                                    <size key="itemSize" width="194" height="195"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" reuseIdentifier="CriticsCollectionViewCell" id="n2Z-ZV-1eb" customClass="CriticsCollectionViewCell" customModule="NyTimes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="194" height="195"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZQ1-dh-b3Z">
+                                            <rect key="frame" x="0.0" y="0.0" width="194" height="195"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J9c-82-kOf">
+                                                    <rect key="frame" x="8" y="8" width="178" height="144.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOm-Q3-TrR">
+                                                    <rect key="frame" x="8" y="160.5" width="178" height="26.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="tOm-Q3-TrR" secondAttribute="bottom" constant="8" id="1Rz-p2-prg"/>
+                                                <constraint firstItem="tOm-Q3-TrR" firstAttribute="leading" secondItem="ZQ1-dh-b3Z" secondAttribute="leading" constant="8" id="655-3t-Nda"/>
+                                                <constraint firstItem="tOm-Q3-TrR" firstAttribute="top" secondItem="J9c-82-kOf" secondAttribute="bottom" constant="8" id="TBf-eD-O5g"/>
+                                                <constraint firstItem="J9c-82-kOf" firstAttribute="top" secondItem="ZQ1-dh-b3Z" secondAttribute="top" constant="8" id="c6Q-qd-Flc"/>
+                                                <constraint firstAttribute="trailing" secondItem="J9c-82-kOf" secondAttribute="trailing" constant="8" id="e29-Eu-jrj"/>
+                                                <constraint firstAttribute="trailing" secondItem="tOm-Q3-TrR" secondAttribute="trailing" constant="8" id="rvh-Ax-Pk5"/>
+                                                <constraint firstItem="J9c-82-kOf" firstAttribute="leading" secondItem="ZQ1-dh-b3Z" secondAttribute="leading" constant="8" id="xhT-QW-uQT"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="194" height="195"/>
+                                        <connections>
+                                            <outlet property="criticsImageView" destination="J9c-82-kOf" id="zjq-Vj-vHw"/>
+                                            <outlet property="criticsNameLabel" destination="tOm-Q3-TrR" id="H5u-58-RP9"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1N4-qW-15b">
+                                <rect key="frame" x="8" y="52" width="398" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="bDj-9w-NAi" firstAttribute="trailing" secondItem="1N4-qW-15b" secondAttribute="trailing" constant="8" id="6nD-D1-Ngv"/>
+                            <constraint firstItem="Tzf-El-N4d" firstAttribute="top" secondItem="1N4-qW-15b" secondAttribute="bottom" constant="8" id="OwJ-mB-za6"/>
+                            <constraint firstItem="Tzf-El-N4d" firstAttribute="leading" secondItem="bDj-9w-NAi" secondAttribute="leading" id="TpO-5O-5ut"/>
+                            <constraint firstItem="1N4-qW-15b" firstAttribute="top" secondItem="bDj-9w-NAi" secondAttribute="top" constant="8" id="XFr-Dk-jln"/>
+                            <constraint firstItem="bDj-9w-NAi" firstAttribute="bottom" secondItem="Tzf-El-N4d" secondAttribute="bottom" id="fAo-Aw-hz8"/>
+                            <constraint firstItem="Tzf-El-N4d" firstAttribute="trailing" secondItem="bDj-9w-NAi" secondAttribute="trailing" id="iJz-n8-czi"/>
+                            <constraint firstItem="1N4-qW-15b" firstAttribute="leading" secondItem="bDj-9w-NAi" secondAttribute="leading" constant="8" id="iK4-9D-wlC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bDj-9w-NAi"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bWf-mE-brS"/>
+                    <connections>
+                        <outlet property="criticsCollectionView" destination="Tzf-El-N4d" id="2Yb-Ft-1ic"/>
+                        <outlet property="searchCriticLabel" destination="1N4-qW-15b" id="rzE-e9-GzB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3KI-D9-dDb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="DEg-Zg-3q5" customClass="CriticModuleInitializer" customModule="NyTimes" customModuleProvider="target">
+                    <connections>
+                        <outlet property="viewController" destination="GdW-IV-ovu" id="pGv-gS-TlS"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="508.69565217391306" y="243.75"/>
+        </scene>
+    </scenes>
+</document>

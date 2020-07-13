@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class CriticsViewController: UIViewController {
+class CriticModuleViewController: UIViewController {
 
     @IBOutlet weak var searchCriticLabel: UITextField!
     @IBOutlet weak var criticsCollectionView: UICollectionView!
@@ -17,22 +17,13 @@ class CriticsViewController: UIViewController {
     private var critics = [Critics]()
     private var tempCritics = [Critics]()
     
-    private var limit = 2
+    private var limit = 8
     private var index = 0
     
-    private let tableRefreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
-        return refreshControl
-    }()
+    var output: CriticModuleViewOutput!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        criticsCollectionView.delegate = self
-        criticsCollectionView.dataSource = self
-        searchCriticLabel.delegate = self
-        criticsCollectionView.refreshControl = tableRefreshControl
         updateCritics()
     }
     
@@ -43,19 +34,8 @@ class CriticsViewController: UIViewController {
     func updateCritics() {
         clearTable()
         let resultString = searchCriticLabel.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        API.critics(searchCriticName: resultString!, succes: { (data) in
-            Critic.parseResponse(responseData: data) { (critic) in
-                guard let data = critic else {return}
-                self.critics = data.results
-                while self.index < self.limit {
-                    self.tempCritics.append(self.critics[self.index])
-                    self.index += 1
-                }
-                self.criticsCollectionView.reloadData()
-            }
-        }) { (error) in
-            print(error)
-        }
+        output.setupInitialState(criticToSearch: resultString!)
+        criticsCollectionView.reloadData()
     }
     
     
@@ -64,37 +44,22 @@ class CriticsViewController: UIViewController {
         updateCritics()
     }
     
-    func configureCell(cell: CriticsCollectionViewCell, for indexPath: IndexPath) {
-        cell.criticsNameLabel.text = tempCritics[indexPath.row].displayName
-        if let multimedia = tempCritics[indexPath.row].multimedia,
-            let source = multimedia.resource?.sourceURL,
-            let url = URL(string: source) {
-            cell.criticsImageView.af.setImage(withURL: url)
-        } else {
-            cell.criticsImageView.image = UIImage(named: "nophoto")
-        }
-    }
-    
     func sendData(for send: [Critics], for indexPath: IndexPath) {
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+        let vc = UIStoryboard(name: "DetailReviewModuleViewController", bundle: nil).instantiateInitialViewController()! as? DetailReviewModuleViewController
         self.present(vc!, animated: true, completion: nil)
         
         vc?.criticNameLabel.text = critics[indexPath.row].displayName
         vc?.descriptionButton.setTitle(critics[indexPath.row].status,for: .normal)
         vc?.detailTitleNavBar.title = critics[indexPath.row].displayName
         vc?.descriptionLabel.text = critics[indexPath.row].bio
-        if let multimedia = tempCritics[indexPath.row].multimedia,
-            let source = multimedia.resource?.sourceURL,
-            let url = URL(string: source) {
-            vc?.criticImageView.af.setImage(withURL: url)
-        } else {
-            vc?.criticImageView.image = UIImage(named: "nophoto")
+        critics[indexPath.row].getImage { (image) in
+            vc?.criticImageView.image = image
         }
     }
 }
 
-extension CriticsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CriticModuleViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tempCritics.count
@@ -102,8 +67,7 @@ extension CriticsViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CriticsCollectionViewCell.identifier, for: indexPath) as! CriticsCollectionViewCell
-            configureCell(cell: cell, for: indexPath)
-        
+        cell.configureCell(results: tempCritics, for: indexPath)
         return cell
     }
     
@@ -120,19 +84,26 @@ extension CriticsViewController: UICollectionViewDelegate, UICollectionViewDataS
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         index = tempCritics.count
+        let indexLast = tempCritics.count - 1
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if contentYoffset > 0 && distanceFromBottom < height && tempCritics.count < critics.count {
-            print(" you reached end of the table")
-            tempCritics.append(critics[index])
-            index += 1
-            criticsCollectionView.reloadData()
+        if (contentYoffset > 0 && distanceFromBottom < height) && tempCritics.count < critics.count {
+            for _ in 0...limit {
+                if indexLast + 1 < critics.count - 1 {
+                    tempCritics.append(critics[index])
+                    index += 1
+                    criticsCollectionView.reloadData()
+                }
+            }
+        }
+        if (contentYoffset < 0) {
+            updateCritics()
         }
     }
 }
 
-extension CriticsViewController: UITextFieldDelegate {
+extension CriticModuleViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchCriticLabel {
@@ -140,5 +111,28 @@ extension CriticsViewController: UITextFieldDelegate {
             updateCritics()
         }
         return true
+    }
+}
+
+extension CriticModuleViewController: CriticModuleViewInput {
+    func onCriticsGet(results: Critic) {
+        critics = results.results
+        while index < limit {
+            tempCritics.append(critics[index])
+            index += 1
+        }
+        self.criticsCollectionView.reloadData()
+    }
+    
+    func setupState() {
+        criticsCollectionView.delegate = self
+        criticsCollectionView.dataSource = self
+        searchCriticLabel.delegate = self
+        
+        let tableRefreshControl = UIRefreshControl()
+        tableRefreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)
+        criticsCollectionView.refreshControl = tableRefreshControl
+        
+        criticsCollectionView.refreshControl = tableRefreshControl
     }
 }

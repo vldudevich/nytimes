@@ -9,8 +9,8 @@
 import Foundation
 
 struct DateRange {
-    private let fromDate: String
-    private let toDate: String
+    let fromDate: String
+    let toDate: String
     private var urlRepresentation: String {
         return "\(fromDate);\(toDate)"
     }

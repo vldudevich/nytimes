@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KDV-Sf-Wqv">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="zOs-dg-FHo">
+            <objects>
+                <viewController storyboardIdentifier="MainModuleViewController" id="b45-fr-x9p" customClass="MainModuleViewController" customModule="NyTimes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i3K-3l-T8C">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKa-2l-GLW">
+                                <rect key="frame" x="8" y="58" width="398" height="716"/>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuF-or-9gT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="40.5"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Qde-6D-Q8D">
+                                        <rect key="frame" x="20" y="4" width="374" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Reviews"/>
+                                            <segment title="Critics"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentControlChanged:" destination="b45-fr-x9p" eventType="valueChanged" id="HyD-BN-pJm"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EuF-or-9gT" firstAttribute="height" secondItem="i3K-3l-T8C" secondAttribute="height" multiplier="0.05" id="5kK-zp-vCc"/>
+                            <constraint firstItem="BbB-8F-Qbh" firstAttribute="trailing" secondItem="EuF-or-9gT" secondAttribute="trailing" id="Knr-6Y-EXp"/>
+                            <constraint firstItem="XKa-2l-GLW" firstAttribute="top" secondItem="EuF-or-9gT" secondAttribute="bottom" constant="17.5" id="SF1-Vf-Czw"/>
+                            <constraint firstItem="EuF-or-9gT" firstAttribute="leading" secondItem="BbB-8F-Qbh" secondAttribute="leading" id="Wa7-wO-FSJ"/>
+                            <constraint firstItem="XKa-2l-GLW" firstAttribute="leading" secondItem="BbB-8F-Qbh" secondAttribute="leading" constant="8" id="dfW-pN-A8r"/>
+                            <constraint firstItem="BbB-8F-Qbh" firstAttribute="bottom" secondItem="XKa-2l-GLW" secondAttribute="bottom" id="fq8-Sc-qMe"/>
+                            <constraint firstItem="BbB-8F-Qbh" firstAttribute="trailing" secondItem="XKa-2l-GLW" secondAttribute="trailing" constant="8" id="hgw-Fr-6tW"/>
+                            <constraint firstItem="EuF-or-9gT" firstAttribute="top" secondItem="BbB-8F-Qbh" secondAttribute="top" id="smF-5j-43m"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BbB-8F-Qbh"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Reviews" id="xNf-PM-npD"/>
+                    <connections>
+                        <outlet property="contentView" destination="XKa-2l-GLW" id="pch-ve-GWs"/>
+                        <outlet property="myNavigationItem" destination="xNf-PM-npD" id="c2z-zT-0yD"/>
+                        <outlet property="myToolBar" destination="EuF-or-9gT" id="Kig-y8-R0j"/>
+                        <outlet property="segmentControl" destination="Qde-6D-Q8D" id="e9H-kR-nYh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DpN-KW-SMB" sceneMemberID="firstResponder"/>
+                <customObject id="Oy6-Hh-NaE" customClass="MainModuleInitializer" customModule="NyTimes" customModuleProvider="target">
+                    <connections>
+                        <outlet property="viewController" destination="b45-fr-x9p" id="ckO-5O-M9Z"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="302.89855072463769" y="-435.26785714285711"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yJW-X9-sWm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KDV-Sf-Wqv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="BOT-st-c2c">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="b45-fr-x9p" kind="relationship" relationship="rootViewController" id="cdn-C2-amu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Fd-OW-n1z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-530" y="-441"/>
+        </scene>
+    </scenes>
+</document>

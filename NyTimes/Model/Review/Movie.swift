@@ -8,10 +8,12 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class Movie: Codable {
     
-    static func parseResponse( responseData: Data, completionHandler: (Review?) -> Void) {
+    static func parseResponse( responseData: Data, completionHandler: (Review) -> Void) {
         let decoder = JSONDecoder()
         do {
             let moviesResponse = try decoder.decode(Review.self, from: responseData)
@@ -21,7 +23,7 @@ class Movie: Codable {
             print(error)
         }
     }
-    
+
     var displayTitle: String
     var rating: String
     var criticsPick: Int
@@ -62,5 +64,18 @@ class Movie: Codable {
         self.dateUpdated = try container.decodeIfPresent(String.self, forKey: .dateUpdated)
         self.link = try container.decode(Link.self, forKey: .link)
         self.multimedia = try container.decodeIfPresent(Multimedia.self, forKey: .multimedia)
+    }
+    
+    func getImage(succes: @escaping (_ success: UIImage) -> Void)  {
+        if let multimedia = multimedia,
+            let source = multimedia.sourceURL,
+            let url = URL(string: source) {
+            Utils.load(url: url) { (data) in
+                guard let image = data else {return}
+                succes(image)
+            }
+        } else {
+            succes(UIImage(named: "nophoto")!)
+        }
     }
 }

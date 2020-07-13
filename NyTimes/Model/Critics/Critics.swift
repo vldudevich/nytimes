@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 class Critics: Codable {
     
     var displayName: String
@@ -37,4 +37,16 @@ class Critics: Codable {
         self.multimedia = try container.decodeIfPresent(Multi.self, forKey: .multimedia)
     }
     
+    func getImage(succes: @escaping (_ success: UIImage) -> Void)  {
+        if let multimedia = multimedia,
+            let source = multimedia.resource?.sourceURL,
+            let url = URL(string: source) {
+            Utils.load(url: url) { (data) in
+                guard let image = data else {return}
+                succes(image)
+            }
+        } else {
+            succes(UIImage(named: "nophoto")!)
+        }
+    }
 }

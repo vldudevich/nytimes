@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol TableViewNew {
-    func onClick(index: Int)
+protocol ReviewsTableViewCellDelegate {
+    func shareButtonTouchUpInside(_ cell: ReviewsTableViewCell)
 }
 
 class ReviewsTableViewCell: UITableViewCell {
@@ -23,26 +23,21 @@ class ReviewsTableViewCell: UITableViewCell {
     @IBOutlet weak var rewiewDateLabel: UILabel!
     @IBOutlet weak var shareButton: UIButton!
     
-    var cellDelegate: TableViewNew?
-    var index: IndexPath?
+    var delegate: ReviewsTableViewCellDelegate?
     
     @IBAction func shareClick(_ sender: Any) {
-        cellDelegate?.onClick(index: (index?.row) ?? 0)
+        delegate?.shareButtonTouchUpInside(self)
     }
     
     func configureCell(results: [Movie], for indexPath: IndexPath) {
-        
-        reviewTitleLabel.text = results[indexPath.row].displayTitle
-        reviewDescriptionLabel.text = results[indexPath.row].summaryShort
-        reviewNameLabel.text = results[indexPath.row].byline
-        rewiewDateLabel.text = results[indexPath.row].dateUpdated
-
-        if let multimedia = results[indexPath.row].multimedia,
-            let source = multimedia.sourceURL,
-            let url = URL(string: source) {
-            reviewImageView.af.setImage(withURL: url)
-        } else {
-            reviewImageView.image = UIImage(named: "nophoto")
+        if results.count != 0 {
+            reviewTitleLabel.text = results[indexPath.row].displayTitle
+            reviewDescriptionLabel.text = results[indexPath.row].summaryShort
+            reviewNameLabel.text = results[indexPath.row].byline
+            rewiewDateLabel.text = results[indexPath.row].dateUpdated
+            results[indexPath.row].getImage { (image) in
+                self.reviewImageView.image = image
+            }
         }
     }
 }
