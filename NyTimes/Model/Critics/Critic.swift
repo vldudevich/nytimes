@@ -9,17 +9,6 @@ import Foundation
 
 class Critic: Codable {
     
-    static func parseResponse( responseData: Data, completionHandler: (Critic) -> Void) {
-        let decoder = JSONDecoder()
-        do {
-            let moviesResponse = try decoder.decode(Critic.self, from: responseData)
-            print(moviesResponse)
-            completionHandler(moviesResponse)
-        } catch {
-            print(error)
-        }
-    }
-    
     var status: String
     var copyright: String
     var results: [Critics]

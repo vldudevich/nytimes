@@ -18,7 +18,8 @@ class CriticModulePresenter: CriticModuleViewOutput {
     }
     
     private func getCriticsData(criticToSearch: String) {
-        DataManager.sharedManager.getCriticsData(criticToSearch: criticToSearch) { (critic) in
+        let dataManager = DataManager()
+        dataManager.getCriticsData(criticToSearch: criticToSearch) { (critic) in
             self.view.onCriticsGet(results: critic)
         }
     }

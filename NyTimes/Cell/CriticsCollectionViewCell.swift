@@ -10,8 +10,8 @@ import UIKit
 
 class CriticsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var criticsImageView: UIImageView!
-    @IBOutlet weak var criticsNameLabel: UILabel!
+    @IBOutlet private weak var criticsImageView: UIImageView!
+    @IBOutlet private weak var criticsNameLabel: UILabel!
     
     static let identifier = "CriticsCollectionViewCell"
     

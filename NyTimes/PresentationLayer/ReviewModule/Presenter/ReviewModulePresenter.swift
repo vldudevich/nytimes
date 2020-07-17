@@ -18,7 +18,8 @@ class ReviewModulePresenter: ReviewModuleViewOutput {
     }
     
     private func getMoviewsData(cityToSearch: String, dateToSearch: DateRange) {
-        DataManager.sharedManager.getMoviesData(cityToSearch: cityToSearch, dateToSearch: dateToSearch) { (review) in
+        let dataManager = DataManager()
+        dataManager.getMoviesData(cityToSearch: cityToSearch, dateToSearch: dateToSearch) { (review) in
             self.view.onMoviesGet(results: review)
         }
     }

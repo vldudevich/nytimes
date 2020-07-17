@@ -15,10 +15,10 @@ class DetailReviewModuleViewController: UIViewController {
     @IBOutlet weak var criticNameLabel: UILabel!
     @IBOutlet weak var descriptionButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var criticsMoviesTableView: UITableView!
-    @IBOutlet weak var myNavigationBar: UINavigationBar!
+    @IBOutlet private weak var criticsMoviesTableView: UITableView!
+    @IBOutlet private weak var myNavigationBar: UINavigationBar!
     @IBOutlet weak var detailTitleNavBar: UINavigationItem!
-    @IBOutlet weak var descriptionView: UIView!
+    @IBOutlet private weak var descriptionView: UIView!
     
     private var movies = [Movie]()
     private var tempMovies = [Movie]()

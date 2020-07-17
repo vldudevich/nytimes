@@ -16,12 +16,12 @@ class CriticsReviewsTableViewCell: UITableViewCell {
     
     static let identifier = "CriticsReviewsTableViewCell"
     
-    @IBOutlet weak var criticsMoviesImageView: UIImageView!
-    @IBOutlet weak var criticsMoviesTitleLabel: UILabel!
-    @IBOutlet weak var criticsDescriptionLabel: UILabel!
-    @IBOutlet weak var criticsNameMoviesLabel: UILabel!
-    @IBOutlet weak var criticsMoviesDateLabel: UILabel!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet private weak var criticsMoviesImageView: UIImageView!
+    @IBOutlet private weak var criticsMoviesTitleLabel: UILabel!
+    @IBOutlet private weak var criticsDescriptionLabel: UILabel!
+    @IBOutlet private weak var criticsNameMoviesLabel: UILabel!
+    @IBOutlet private weak var criticsMoviesDateLabel: UILabel!
+    @IBOutlet private weak var shareButton: UIButton!
     
     private var cellDelegate: CriticsReviewsTableViewCellDelegate?
     

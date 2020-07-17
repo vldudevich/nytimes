@@ -10,7 +10,7 @@ import Foundation
 
 class ReviewModuleInitializer: NSObject {
     
-    @IBOutlet var viewController: ReviewModuleViewController!
+    @IBOutlet private var viewController: ReviewModuleViewController!
     
     override func awakeFromNib() {
         let configurator = ReviewModuleConfigurator()

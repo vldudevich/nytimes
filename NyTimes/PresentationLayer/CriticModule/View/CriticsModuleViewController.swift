@@ -11,8 +11,8 @@ import AlamofireImage
 
 class CriticModuleViewController: UIViewController {
 
-    @IBOutlet weak var searchCriticLabel: UITextField!
-    @IBOutlet weak var criticsCollectionView: UICollectionView!
+    @IBOutlet private weak var searchCriticLabel: UITextField!
+    @IBOutlet private weak var criticsCollectionView: UICollectionView!
     
     private var critics = [Critics]()
     private var tempCritics = [Critics]()

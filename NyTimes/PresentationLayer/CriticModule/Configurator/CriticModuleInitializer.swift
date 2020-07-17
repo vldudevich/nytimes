@@ -9,7 +9,7 @@
 import Foundation
 
 class CriticModuleInitializer: NSObject {
-    @IBOutlet var viewController: CriticModuleViewController!
+    @IBOutlet private var viewController: CriticModuleViewController!
     
     override func awakeFromNib() {
         let configurator = CriticModuleConfigurator()

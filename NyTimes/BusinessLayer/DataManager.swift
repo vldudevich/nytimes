@@ -11,11 +11,10 @@ import UIKit
 
 class DataManager {
     
-    static let sharedManager = DataManager()
-    
     func getMoviesData(cityToSearch: String, dateToSearch: DateRange, succes: @escaping (_ success: Review) -> Void) {
-        API.sharedManager.reviews(stringToSearch: cityToSearch, dateToSearch: dateToSearch,  succes: { (data) in
-            Review.parseResponse(responseData: data) { (review) in
+        let api = API()
+        api.reviews(stringToSearch: cityToSearch, dateToSearch: dateToSearch,  succes: { (data) in
+            api.parseResponse(responseData: data) { (review) in
                 succes(review)
             }
         }) { (error) in
@@ -23,9 +22,10 @@ class DataManager {
         }
     }
     
-    func getCriticsData(criticToSearch: String, _ succes: @escaping (_ success: Critic) -> Void) {
-        API.sharedManager.critics(searchCriticName: criticToSearch, succes: { (data) in
-            Critic.parseResponse(responseData: data) { (critic) in
+    func getCriticsData(criticToSearch: String, succes: @escaping (_ success: Critic) -> Void) {
+        let api = API()
+        api.critics(searchCriticName: criticToSearch, succes: { (data) in
+            api.parseResponse(responseData: data) { (critic) in
                 succes(critic)
             }
         }) { (error) in
@@ -34,8 +34,9 @@ class DataManager {
     }
     
     func searchCriticsMovies(searchMovies: String, succes: @escaping (_ success: Review) -> Void) {
-        API.sharedManager.searchCriticsMovies(searchMovies: searchMovies, succes: { (data) in
-            Review.parseResponse(responseData: data) { (critic) in
+        let api = API()
+        api.searchCriticsMovies(searchMovies: searchMovies, succes: { (data) in
+            api.parseResponse(responseData: data) { (critic) in
                 succes(critic)
             }
         }) { (error) in

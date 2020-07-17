@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+
 class Critics: Codable {
     
     var displayName: String

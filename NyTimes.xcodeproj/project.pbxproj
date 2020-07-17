@@ -26,7 +26,7 @@
 		867ABD782472F35800FFB431 /* MainModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ABD772472F35800FFB431 /* MainModuleViewController.swift */; };
 		867ABD7D2472F35A00FFB431 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 867ABD7C2472F35A00FFB431 /* Assets.xcassets */; };
 		867ABD802472F35A00FFB431 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 867ABD7E2472F35A00FFB431 /* LaunchScreen.storyboard */; };
-		867CC7E4248529E700196392 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867CC7E3248529E700196392 /* Extensions.swift */; };
+		867CC7E4248529E700196392 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867CC7E3248529E700196392 /* String.swift */; };
 		868150C624B61AC0005542EF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868150C524B61AC0005542EF /* Utils.swift */; };
 		868B226B24AB815900D9332E /* MainModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868B226A24AB815900D9332E /* MainModuleInitializer.swift */; };
 		868B226D24AB84C900D9332E /* MainModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868B226C24AB84C900D9332E /* MainModuleConfigurator.swift */; };
@@ -34,6 +34,8 @@
 		868B227124AB857D00D9332E /* MainModuleViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868B227024AB857D00D9332E /* MainModuleViewOutput.swift */; };
 		868B227324AB86BC00D9332E /* MainModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 868B227224AB86BC00D9332E /* MainModuleViewController.storyboard */; };
 		868B227524AB86E500D9332E /* MainModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868B227424AB86E500D9332E /* MainModulePresenter.swift */; };
+		86B8F59B24C1F0D900A8EDB4 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8F59A24C1F0D900A8EDB4 /* UIView.swift */; };
+		86B8F59D24C1F10A00A8EDB4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8F59C24C1F10A00A8EDB4 /* UIColor.swift */; };
 		86C30C6124ACAA1900F4E8FC /* ReviewModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C30C6024ACAA1900F4E8FC /* ReviewModuleViewController.storyboard */; };
 		86C30C6324ACAA7D00F4E8FC /* ReviewModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C30C6224ACAA7D00F4E8FC /* ReviewModuleInitializer.swift */; };
 		86C30C6524ACAA8A00F4E8FC /* ReviewModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C30C6424ACAA8A00F4E8FC /* ReviewModuleConfigurator.swift */; };
@@ -95,7 +97,7 @@
 		867ABD7C2472F35A00FFB431 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		867ABD7F2472F35A00FFB431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		867ABD812472F35A00FFB431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		867CC7E3248529E700196392 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		867CC7E3248529E700196392 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		868150C524B61AC0005542EF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		868B226A24AB815900D9332E /* MainModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleInitializer.swift; sourceTree = "<group>"; };
 		868B226C24AB84C900D9332E /* MainModuleConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleConfigurator.swift; sourceTree = "<group>"; };
@@ -103,6 +105,8 @@
 		868B227024AB857D00D9332E /* MainModuleViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleViewOutput.swift; sourceTree = "<group>"; };
 		868B227224AB86BC00D9332E /* MainModuleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainModuleViewController.storyboard; sourceTree = "<group>"; };
 		868B227424AB86E500D9332E /* MainModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModulePresenter.swift; sourceTree = "<group>"; };
+		86B8F59A24C1F0D900A8EDB4 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		86B8F59C24C1F10A00A8EDB4 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		86C30C6024ACAA1900F4E8FC /* ReviewModuleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReviewModuleViewController.storyboard; sourceTree = "<group>"; };
 		86C30C6224ACAA7D00F4E8FC /* ReviewModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModuleInitializer.swift; sourceTree = "<group>"; };
 		86C30C6424ACAA8A00F4E8FC /* ReviewModuleConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModuleConfigurator.swift; sourceTree = "<group>"; };
@@ -171,8 +175,10 @@
 		86482D16248573DB00ED31D8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				867CC7E3248529E700196392 /* Extensions.swift */,
+				867CC7E3248529E700196392 /* String.swift */,
+				86B8F59A24C1F0D900A8EDB4 /* UIView.swift */,
 				868150C524B61AC0005542EF /* Utils.swift */,
+				86B8F59C24C1F10A00A8EDB4 /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -545,7 +551,7 @@
 				8614E07A247EA52E002FDC9B /* Resource.swift in Sources */,
 				865A43C8247D71A50031728A /* Multimedia.swift in Sources */,
 				863F0D6324818C73003134C3 /* DateRange.swift in Sources */,
-				867CC7E4248529E700196392 /* Extensions.swift in Sources */,
+				867CC7E4248529E700196392 /* String.swift in Sources */,
 				86C30C6D24ACBED700F4E8FC /* ReviewModulePresenter.swift in Sources */,
 				861650EF249790CC00233905 /* APIConstant.swift in Sources */,
 				868B226D24AB84C900D9332E /* MainModuleConfigurator.swift in Sources */,
@@ -566,6 +572,7 @@
 				866DAE7A248453DB004256FF /* DetailReviewModuleViewController.swift in Sources */,
 				867A99CC247D7BED002D6B5B /* Review.swift in Sources */,
 				86C30C6924ACAAAF00F4E8FC /* ReviewModuleViewOutput.swift in Sources */,
+				86B8F59D24C1F10A00A8EDB4 /* UIColor.swift in Sources */,
 				868B226F24AB856000D9332E /* MainModuleViewInput.swift in Sources */,
 				8614E074247E9F3A002FDC9B /* Critic.swift in Sources */,
 				86FA29E324BC655800F32088 /* DataManager.swift in Sources */,
@@ -573,6 +580,7 @@
 				86C30C8824ACC71600F4E8FC /* DetailReviewModuleViewInput.swift in Sources */,
 				865A43C6247D71810031728A /* Movie.swift in Sources */,
 				86C30C8624ACC6FD00F4E8FC /* DetailReviewModuleConfigurator.swift in Sources */,
+				86B8F59B24C1F0D900A8EDB4 /* UIView.swift in Sources */,
 				86C30C6724ACAA9C00F4E8FC /* ReviewModuleViewInput.swift in Sources */,
 				8652873F2477D7A300876BF9 /* API.swift in Sources */,
 				868B226B24AB815900D9332E /* MainModuleInitializer.swift in Sources */,
@@ -718,6 +726,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6X8QU6ZAU;
 				INFOPLIST_FILE = NyTimes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -737,6 +746,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6X8QU6ZAU;
 				INFOPLIST_FILE = NyTimes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -11,10 +11,10 @@ import AlamofireImage
 
 class ReviewModuleViewController: UIViewController {
 
-    @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var dataPickerTextFieldFrom: UITextField!
-    @IBOutlet weak var dataPickerTextFieldTo: UITextField!
-    @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet private weak var searchTextField: UITextField!
+    @IBOutlet private weak var dataPickerTextFieldFrom: UITextField!
+    @IBOutlet private weak var dataPickerTextFieldTo: UITextField!
+    @IBOutlet private weak var moviesTableView: UITableView!
     
     let myDatePicker = UIDatePicker()
     

@@ -15,10 +15,10 @@ class MainModuleViewController: UIViewController {
         case criticsViewControllerTab = 1
     }
     
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var myToolBar: UIView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
-    @IBOutlet weak var myNavigationItem: UINavigationItem!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var myToolBar: UIView!
+    @IBOutlet private weak var segmentControl: UISegmentedControl!
+    @IBOutlet private weak var myNavigationItem: UINavigationItem!
     
     var output: MainModuleViewOutput!
     

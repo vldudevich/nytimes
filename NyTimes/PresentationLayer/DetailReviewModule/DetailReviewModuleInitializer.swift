@@ -9,7 +9,7 @@
 import Foundation
 
 class DetailReviewModuleInitializer: NSObject {
-    @IBOutlet var viewController: DetailReviewModuleViewController!
+    @IBOutlet private var viewController: DetailReviewModuleViewController!
     
     override func awakeFromNib() {
         let configurator = DetailReviewModuleConfigurator()

@@ -10,7 +10,7 @@ import Foundation
 
 class MainModuleInitializer: NSObject {
     
-    @IBOutlet var viewController: MainModuleViewController!
+    @IBOutlet private var viewController: MainModuleViewController!
     
     override func awakeFromNib() {
         let configurator = MainModuleConfigurator()

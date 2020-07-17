@@ -16,12 +16,12 @@ class ReviewsTableViewCell: UITableViewCell {
     
     static let identifier = "ReviewTableViewCell"
     
-    @IBOutlet weak var reviewTitleLabel: UILabel!
-    @IBOutlet weak var reviewImageView: UIImageView!
-    @IBOutlet weak var reviewDescriptionLabel: UILabel!
-    @IBOutlet weak var reviewNameLabel: UILabel!
-    @IBOutlet weak var rewiewDateLabel: UILabel!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet private weak var reviewTitleLabel: UILabel!
+    @IBOutlet private weak var reviewImageView: UIImageView!
+    @IBOutlet private weak var reviewDescriptionLabel: UILabel!
+    @IBOutlet private weak var reviewNameLabel: UILabel!
+    @IBOutlet private weak var rewiewDateLabel: UILabel!
+    @IBOutlet private weak var shareButton: UIButton!
     
     var delegate: ReviewsTableViewCellDelegate?
     

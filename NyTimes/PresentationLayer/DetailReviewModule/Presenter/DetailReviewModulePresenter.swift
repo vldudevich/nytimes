@@ -17,7 +17,8 @@ class DetailReviewModulePresenter: DetailReviewModuleViewOutput {
     }
     
     private func getMoviewsData(searchMovies: String) {
-        DataManager.sharedManager.searchCriticsMovies(searchMovies: searchMovies) { (critic) in
+        let dataManager = DataManager()
+        dataManager.searchCriticsMovies(searchMovies: searchMovies) { (critic) in
             self.view.onMoviesGet(results: critic)
         }
     }
