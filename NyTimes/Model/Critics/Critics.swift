@@ -42,7 +42,7 @@ class Critics: Codable {
         if let multimedia = multimedia,
             let source = multimedia.resource?.sourceURL,
             let url = URL(string: source) {
-            Utils.load(url: url) { (data) in
+            Utils.download(from: url) { (data) in
                 guard let image = data else {return}
                 succes(image)
             }

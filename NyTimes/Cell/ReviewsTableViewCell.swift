@@ -29,15 +29,13 @@ class ReviewsTableViewCell: UITableViewCell {
         delegate?.shareButtonTouchUpInside(self)
     }
     
-    func configureCell(results: [Movie], for indexPath: IndexPath) {
-        if results.count != 0 {
-            reviewTitleLabel.text = results[indexPath.row].displayTitle
-            reviewDescriptionLabel.text = results[indexPath.row].summaryShort
-            reviewNameLabel.text = results[indexPath.row].byline
-            rewiewDateLabel.text = results[indexPath.row].dateUpdated
-            results[indexPath.row].getImage { (image) in
-                self.reviewImageView.image = image
-            }
+    func configureCell(results: Movie) {
+        reviewTitleLabel.text = results.displayTitle
+        reviewDescriptionLabel.text = results.summaryShort
+        reviewNameLabel.text = results.byline
+        rewiewDateLabel.text = results.dateUpdated
+        results.getImage { (image) in
+            self.reviewImageView.image = image
         }
     }
 }

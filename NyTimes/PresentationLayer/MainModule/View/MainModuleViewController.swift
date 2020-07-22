@@ -43,9 +43,11 @@ class MainModuleViewController: UIViewController {
         
         myNavigationItem.title = "Reviews"
         self.navigationController?.navigationBar.barTintColor = .lightOrange
-        myToolBar.backgroundColor = .lightOrange
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        myToolBar.backgroundColor = .lightOrange
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        segmentControl.layer.borderWidth = 1.0
+        segmentControl.layer.borderColor = UIColor.white.cgColor
         segmentControl.backgroundColor = .lightOrange
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightOrange], for: .selected)
@@ -57,6 +59,8 @@ class MainModuleViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .lightBlue
         self.navigationController?.navigationBar.shadowImage = UIImage()
         myToolBar.backgroundColor = .lightBlue
+        segmentControl.layer.borderWidth = 1.0
+        segmentControl.layer.borderColor = UIColor.white.cgColor
         segmentControl.backgroundColor = .lightBlue
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightBlue], for: .selected)

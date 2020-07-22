@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class CriticModuleViewController: UIViewController {
 
@@ -18,8 +17,7 @@ class CriticModuleViewController: UIViewController {
     private var tempCritics = [Critics]()
     
     private var limit = 8
-    private var index = 0
-    
+
     var output: CriticModuleViewOutput!
     
     override func viewDidLoad() {
@@ -28,7 +26,6 @@ class CriticModuleViewController: UIViewController {
     }
     
     private func clearTable() {
-        index = 0
     }
     
     func updateCritics() {
@@ -44,16 +41,16 @@ class CriticModuleViewController: UIViewController {
         updateCritics()
     }
     
-    func sendData(for send: [Critics], for indexPath: IndexPath) {
+    func sendData(for critic: Critics) {
         
         let vc = UIStoryboard(name: "DetailReviewModuleViewController", bundle: nil).instantiateInitialViewController()! as? DetailReviewModuleViewController
         self.present(vc!, animated: true, completion: nil)
         
-        vc?.criticNameLabel.text = critics[indexPath.row].displayName
-        vc?.descriptionButton.setTitle(critics[indexPath.row].status,for: .normal)
-        vc?.detailTitleNavBar.title = critics[indexPath.row].displayName
-        vc?.descriptionLabel.text = critics[indexPath.row].bio
-        critics[indexPath.row].getImage { (image) in
+        vc?.criticNameLabel.text = critic.displayName
+        vc?.descriptionButton.setTitle(critic.status,for: .normal)
+        vc?.detailTitleNavBar.title = critic.displayName
+        vc?.descriptionLabel.text = critic.bio
+        critic.getImage { (image) in
             vc?.criticImageView.image = image
         }
     }
@@ -67,7 +64,7 @@ extension CriticModuleViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CriticsCollectionViewCell.identifier, for: indexPath) as! CriticsCollectionViewCell
-        cell.configureCell(results: tempCritics, for: indexPath)
+        cell.configureCell(results: tempCritics[indexPath.row])
         return cell
     }
     
@@ -78,27 +75,25 @@ extension CriticModuleViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        sendData(for: critics, for: indexPath)
+        sendData(for: critics[indexPath.row])
     }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
-        index = tempCritics.count
-        let indexLast = tempCritics.count - 1
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if (contentYoffset > 0 && distanceFromBottom < height) && tempCritics.count < critics.count {
-            for _ in 0...limit {
-                if indexLast + 1 < critics.count - 1 {
-                    tempCritics.append(critics[index])
-                    index += 1
+            
+            if tempCritics.count < critics.count - 1 {
+                if tempCritics.count < critics.count {
+                    limit = tempCritics.count + 4
+                    if limit > critics.count - 1 {
+                        limit = critics.count
+                    }
+                    tempCritics.append(contentsOf: critics[tempCritics.count..<limit])
                     criticsCollectionView.reloadData()
                 }
             }
-        }
-        if (contentYoffset < 0) {
-            updateCritics()
         }
     }
 }
@@ -117,11 +112,8 @@ extension CriticModuleViewController: UITextFieldDelegate {
 extension CriticModuleViewController: CriticModuleViewInput {
     func onCriticsGet(results: Critic) {
         critics = results.results
-        while index < limit {
-            tempCritics.append(critics[index])
-            index += 1
-        }
-        self.criticsCollectionView.reloadData()
+        tempCritics.append(contentsOf: critics[0..<limit])
+        criticsCollectionView.reloadData()
     }
     
     func setupState() {

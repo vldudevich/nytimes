@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class Utils {
-   static func download(
+    
+    static func download(
         from url: URL,
         contentMode: UIView.ContentMode = .scaleAspectFit,
         placeholder: UIImage? = nil,
@@ -31,17 +32,4 @@ class Utils {
             }
         }.resume()
     }
-    
-    static func load(url: URL, completionHandler: ((UIImage?) -> Void)? = nil) {
-        DispatchQueue.global().async { [] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        completionHandler?(image)
-                    }
-                }
-            }
-        }
-    }
 }
-

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class DetailReviewModuleViewController: UIViewController {
 
@@ -22,8 +21,7 @@ class DetailReviewModuleViewController: UIViewController {
     
     private var movies = [Movie]()
     private var tempMovies = [Movie]()
-    private var limit = 3
-    private var index = 0
+    private var limit = 5
     
     var output: DetailReviewModuleViewOutput!
     
@@ -31,7 +29,7 @@ class DetailReviewModuleViewController: UIViewController {
         super.viewDidLoad()
         updateCriticsReviews()
     }
-    
+
     @objc func updateRefresh(_ sender: UIRefreshControl) {
         sender.endRefreshing()
         updateCriticsReviews()
@@ -42,13 +40,12 @@ class DetailReviewModuleViewController: UIViewController {
     }
 
     func clearTable() {
-        index = 0
-        tempMovies.removeAll()
     }
     
     func updateCriticsReviews() {
         clearTable()
-        output.setupInitialState(searchMovies: criticNameLabel.text!)
+        let encodeString = criticNameLabel.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        output.setupInitialState(searchMovies: encodeString!)
         criticsMoviesTableView.reloadData()
     }
     
@@ -67,30 +64,25 @@ extension DetailReviewModuleViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CriticsReviewsTableViewCell.identifier) as! CriticsReviewsTableViewCell
-        cell.configureCell(results: tempMovies, for: indexPath)
+        cell.configureCell(results: tempMovies[indexPath.row])
         
         return cell
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        index = tempMovies.count
-        let indexLast = tempMovies.count - 1
-        let height = scrollView.frame.size.height
-        let contentYoffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if (contentYoffset > 0 && distanceFromBottom < height) && tempMovies.count < movies.count {
-            for _ in 0...limit {
-                if indexLast + 1 < movies.count - 1 {
-                    tempMovies.append(movies[index])
-                    index += 1
-                    criticsMoviesTableView.reloadData()
-                }
+        if indexPath.row == tempMovies.count - 1  {
+            if tempMovies.count < movies.count {
+                limit = tempMovies.count + 1
+                tempMovies.append(contentsOf: movies[tempMovies.count..<limit])
+                criticsMoviesTableView.reloadData()
             }
+            
         }
-        if (contentYoffset < 0) {
-            updateCriticsReviews()
-        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        criticsMoviesTableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -123,11 +115,11 @@ extension DetailReviewModuleViewController: DetailReviewModuleViewInput {
     func onMoviesGet(results: Review) {
         clearTable()
         movies = results.results
-        while index < limit {
-            tempMovies.append(movies[self.index])
-            index += 1
+        if tempMovies.count < movies.count {
+            tempMovies.append(contentsOf: movies[0..<limit])
+            criticsMoviesTableView.reloadData()
         }
-        criticsMoviesTableView.reloadData()
+        
     }
     
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class ReviewModuleViewController: UIViewController {
 
@@ -16,15 +15,13 @@ class ReviewModuleViewController: UIViewController {
     @IBOutlet private weak var dataPickerTextFieldTo: UITextField!
     @IBOutlet private weak var moviesTableView: UITableView!
     
-    let myDatePicker = UIDatePicker()
+    private let myDatePicker = UIDatePicker()
     
     private var movies = [Movie]()
     private var tempMovies = [Movie]()
     private var numResults = 0
-    private var limit = 3
-    private var index = 0
+    private var limit = 2
     private var bufDate = ""
-    private var isLoading = false
     
     var output: ReviewModuleViewOutput!
     
@@ -37,7 +34,6 @@ class ReviewModuleViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         updateMovies()
@@ -75,8 +71,7 @@ class ReviewModuleViewController: UIViewController {
     }
     
     func clearTable() {
-        index = 0
-        tempMovies.removeAll()
+        
     }
     
     func updateMovies() {
@@ -94,33 +89,25 @@ extension ReviewModuleViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReviewsTableViewCell.identifier) as! ReviewsTableViewCell
         cell.delegate = self
-        cell.configureCell(results: tempMovies, for: indexPath)
+        cell.configureCell(results: tempMovies[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         moviesTableView.deselectRow(at: indexPath, animated: true)
-
     }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        index = tempMovies.count
-        let indexLast = tempMovies.count - 1
-        let height = scrollView.frame.size.height
-        let contentYoffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if (contentYoffset > 0 && distanceFromBottom < height) && tempMovies.count < movies.count {
-            for _ in 0...limit {
-                if indexLast + 1 < movies.count - 1 {
-                    tempMovies.append(movies[index])
-                    index += 1
-                    moviesTableView.reloadData()
+        if indexPath.row == tempMovies.count - 1  {
+            if tempMovies.count < movies.count {
+                limit = tempMovies.count + 5
+                if limit > movies.count {
+                    limit = movies.count
                 }
+                tempMovies.append(contentsOf: movies[tempMovies.count..<limit])
+                moviesTableView.reloadData()
             }
-        }
-        if (contentYoffset < 0) {
-            updateMovies()
         }
     }
 }
@@ -164,20 +151,19 @@ extension ReviewModuleViewController: ReviewModuleViewInput {
     func onMoviesGet(results: Review) {
         clearTable()
         movies = results.results
-        while index < limit && tempMovies.count < movies.count {
-            tempMovies.append(movies[self.index])
-            index += 1
+        if tempMovies.count < movies.count {
+            tempMovies.append(contentsOf: movies[0..<limit])
         }
         moviesTableView.reloadData()
     }
     
     func setupState() {
-        self.moviesTableView.delegate = self
-        self.moviesTableView.dataSource = self
-        
-        self.searchTextField.delegate = self
-        self.dataPickerTextFieldFrom.delegate = self
-        self.dataPickerTextFieldTo.delegate = self
+        moviesTableView.delegate = self
+        moviesTableView.dataSource = self
+
+        searchTextField.delegate = self
+        dataPickerTextFieldFrom.delegate = self
+        dataPickerTextFieldTo.delegate = self
         
         let tableRefreshControl = UIRefreshControl()
         tableRefreshControl.addTarget(self, action: #selector(updateRefresh(_:)), for: .valueChanged)

@@ -12,9 +12,9 @@ enum APIConstant: String {
     
     case apiKey = "api-key"
     case apiKeyValue  = "cGDuolttixJXxCmkFDeTTNnOA5EOidPt"
-    case baseURL = "https://api.nytimes.com/svc/movies/v2/"
-    case reviewsURL = "reviews/search.json"
-    case criticssURL = "critics/all.json"
-    case reviewsMoviesURL = "reviews/"
-    case criticsURL = "critics/"
+    case baseURL = "api.nytimes.com"
+    case reviewsURL = "/svc/movies/v2/reviews/search.json"
+    case criticssURL = "/svc/movies/v2/critics/all.json"
+    case reviewsMoviesURL = "/svc/movies/v2/reviews/"
+    case criticsURL = "/svc/movies/v2/critics/"
 }

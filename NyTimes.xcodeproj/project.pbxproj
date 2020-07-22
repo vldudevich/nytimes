@@ -36,6 +36,7 @@
 		868B227524AB86E500D9332E /* MainModulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868B227424AB86E500D9332E /* MainModulePresenter.swift */; };
 		86B8F59B24C1F0D900A8EDB4 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8F59A24C1F0D900A8EDB4 /* UIView.swift */; };
 		86B8F59D24C1F10A00A8EDB4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8F59C24C1F10A00A8EDB4 /* UIColor.swift */; };
+		86B8F59F24C58D4700A8EDB4 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8F59E24C58D4700A8EDB4 /* URLComponents.swift */; };
 		86C30C6124ACAA1900F4E8FC /* ReviewModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C30C6024ACAA1900F4E8FC /* ReviewModuleViewController.storyboard */; };
 		86C30C6324ACAA7D00F4E8FC /* ReviewModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C30C6224ACAA7D00F4E8FC /* ReviewModuleInitializer.swift */; };
 		86C30C6524ACAA8A00F4E8FC /* ReviewModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C30C6424ACAA8A00F4E8FC /* ReviewModuleConfigurator.swift */; };
@@ -107,6 +108,7 @@
 		868B227424AB86E500D9332E /* MainModulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModulePresenter.swift; sourceTree = "<group>"; };
 		86B8F59A24C1F0D900A8EDB4 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		86B8F59C24C1F10A00A8EDB4 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		86B8F59E24C58D4700A8EDB4 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		86C30C6024ACAA1900F4E8FC /* ReviewModuleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReviewModuleViewController.storyboard; sourceTree = "<group>"; };
 		86C30C6224ACAA7D00F4E8FC /* ReviewModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModuleInitializer.swift; sourceTree = "<group>"; };
 		86C30C6424ACAA8A00F4E8FC /* ReviewModuleConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModuleConfigurator.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				86B8F59A24C1F0D900A8EDB4 /* UIView.swift */,
 				868150C524B61AC0005542EF /* Utils.swift */,
 				86B8F59C24C1F10A00A8EDB4 /* UIColor.swift */,
+				86B8F59E24C58D4700A8EDB4 /* URLComponents.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				86D8FBC7247D3A9100465E2E /* CriticsCollectionViewCell.swift in Sources */,
 				86C30C8A24ACC72300F4E8FC /* DetailReviewModuleViewOutput.swift in Sources */,
 				866DAE7A248453DB004256FF /* DetailReviewModuleViewController.swift in Sources */,
+				86B8F59F24C58D4700A8EDB4 /* URLComponents.swift in Sources */,
 				867A99CC247D7BED002D6B5B /* Review.swift in Sources */,
 				86C30C6924ACAAAF00F4E8FC /* ReviewModuleViewOutput.swift in Sources */,
 				86B8F59D24C1F10A00A8EDB4 /* UIColor.swift in Sources */,

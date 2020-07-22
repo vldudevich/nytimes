@@ -15,20 +15,16 @@ class API {
     typealias ErrorBlock = (_ error: Any) -> Void
     typealias ImageBlock = (_ success: UIImage) -> Void
     
-    static let sharedManager = API()
+    func request(for path: String, paramsDict: [String: Any]) -> DataRequest? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = APIConstant.baseURL.rawValue
+        urlComponents.path = path
+        urlComponents.setQueryItems(with: paramsDict)
+        urlComponents.queryItems?.append(URLQueryItem(name: APIConstant.apiKey.rawValue, value: APIConstant.apiKeyValue.rawValue))
     
-    func request(for url: String, paramsDict: [String: Any]) -> DataRequest? {
-        guard let reviewURL = URL(string: APIConstant.baseURL.rawValue + url) else {
-            return nil
-        }
-        var parameters: Parameters = [
-            APIConstant.apiKey.rawValue: APIConstant.apiKeyValue.rawValue,
-        ]
-        parameters.merge(paramsDict) { (value1, value2) -> Any in
-            return value1
-        }
-        
-        return AF.request(reviewURL, method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+        guard let resultUrl = urlComponents.url else { return nil }
+        return AF.request(resultUrl, method: .get, encoding: URLEncoding(destination: .queryString), headers: nil)
     }
     
     func reviews(stringToSearch: String, dateToSearch: DateRange, succes: @escaping CompletionBlock, failure: @escaping ErrorBlock) {
@@ -50,14 +46,14 @@ class API {
     
     func critics(searchCriticName: String, succes: @escaping CompletionBlock, failure: @escaping ErrorBlock) {
         
-        var url = APIConstant.criticssURL.rawValue
+        var url: String
         
         if searchCriticName != "" {
-            url = APIConstant.criticsURL.rawValue + searchCriticName
+            url = APIConstant.criticsURL.rawValue + searchCriticName + ".json"
         }else {
-            url = APIConstant.criticsURL.rawValue + "all"
+            url = APIConstant.criticssURL.rawValue
         }
-        url = url + ".json"
+
         if let request = self.request(for: url, paramsDict: [:]) {
             request.response(completionHandler: { (response) in
                 if let realData = response.data {
@@ -73,8 +69,7 @@ class API {
     }
     
     func searchCriticsMovies(searchMovies: String, succes: @escaping CompletionBlock, failure: @escaping ErrorBlock) {
-        let encodeString = searchMovies.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        if let request = self.request(for: APIConstant.reviewsMoviesURL.rawValue + encodeString! + ".json", paramsDict: [:]) {
+        if let request = self.request(for: APIConstant.reviewsMoviesURL.rawValue + searchMovies + ".json", paramsDict: [:]) {
             request.response(completionHandler: { (response) in
                 if let realData = response.data {
                     print("success recieve critics movies")

@@ -8,8 +8,6 @@
 
 import Foundation
 import UIKit
-import Alamofire
-import AlamofireImage
 
 class Movie: Codable {
     
@@ -70,7 +68,7 @@ class Movie: Codable {
         if let multimedia = multimedia,
             let source = multimedia.sourceURL,
             let url = URL(string: source) {
-            Utils.load(url: url) { (data) in
+            Utils.download(from: url) { (data) in
                 guard let image = data else {return}
                 succes(image)
             }

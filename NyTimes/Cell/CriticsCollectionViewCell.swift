@@ -15,12 +15,10 @@ class CriticsCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CriticsCollectionViewCell"
     
-    func configureCell(results: [Critics], for indexPath: IndexPath) {
-        if results.count != 0 {
-            criticsNameLabel.text = results[indexPath.row].displayName
-            results[indexPath.row].getImage { (image) in
-                self.criticsImageView.image = image
-            }
+    func configureCell(results: Critics) {
+        criticsNameLabel.text = results.displayName
+        results.getImage { (image) in
+            self.criticsImageView.image = image
         }
     }
 }

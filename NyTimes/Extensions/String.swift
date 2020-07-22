@@ -17,8 +17,4 @@ extension String {
         
         return decoded ?? self
     }
-    func encoded(stringToEncode: String) -> String {
-            let resultString = stringToEncode.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        return resultString!
-    }
 }

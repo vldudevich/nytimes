@@ -29,12 +29,12 @@ class CriticsReviewsTableViewCell: UITableViewCell {
         cellDelegate?.shareButtonTouchUpInside(self)
     }
     
-    func configureCell(results: [Movie], for indexPath: IndexPath) {
-        criticsMoviesTitleLabel.text = results[indexPath.row].displayTitle
-        criticsDescriptionLabel.text = results[indexPath.row].summaryShort
-        criticsNameMoviesLabel.text = results[indexPath.row].byline
-        criticsMoviesDateLabel.text = results[indexPath.row].dateUpdated
-        results[indexPath.row].getImage { (image) in
+    func configureCell(results: Movie) {
+        criticsMoviesTitleLabel.text = results.displayTitle
+        criticsDescriptionLabel.text = results.summaryShort
+        criticsNameMoviesLabel.text = results.byline
+        criticsMoviesDateLabel.text = results.dateUpdated
+        results.getImage { (image) in
             self.criticsMoviesImageView.image = image
         }
     }
