@@ -10,7 +10,7 @@ import UIKit
 
 class MainModulePresenter: MainModuleViewOutput {
     
-    var view: MainModuleViewInput!
+    weak var view: MainModuleViewInput!
     
     let reviewsViewController = UIStoryboard(name: "ReviewModuleViewController", bundle: nil).instantiateInitialViewController()!
     let criticsViewController = UIStoryboard(name: "CriticModuleViewController", bundle: nil).instantiateInitialViewController()!

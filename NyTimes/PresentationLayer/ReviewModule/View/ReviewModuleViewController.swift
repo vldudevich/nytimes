@@ -100,14 +100,7 @@ extension ReviewModuleViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if indexPath.row == tempMovies.count - 1  {
-            if tempMovies.count < movies.count {
-                limit = tempMovies.count + 5
-                if limit > movies.count {
-                    limit = movies.count
-                }
-                tempMovies.append(contentsOf: movies[tempMovies.count..<limit])
-                moviesTableView.reloadData()
-            }
+        
         }
     }
 }

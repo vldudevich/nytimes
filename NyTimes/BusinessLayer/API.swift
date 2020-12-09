@@ -13,7 +13,6 @@ class API {
     
     typealias CompletionBlock = (_ success: Data) -> Void
     typealias ErrorBlock = (_ error: Any) -> Void
-    typealias ImageBlock = (_ success: UIImage) -> Void
     
     func request(for path: String, paramsDict: [String: Any]) -> DataRequest? {
         var urlComponents = URLComponents()
